@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #26251C;
+    height: 150px;
+    padding: 5px 10px;
+    gap: 2rem;
+}
+
+.div_logo {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_logo img {
+    width: 80%;
+    height: 90%;
+}
+
+.div_links {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+}
+
+.link:hover {
+    color: #DB4B23;
+    transition: 0.5s;
+}
+
+.link_borda {
+    border-bottom: 2px solid white;
+}
+
+.link_borda:hover {
+    border-bottom: 2px solid #DB4B23;
+    transition: 0.5s;
+}
+
+.div_login {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.btn_login {
+    width: 60%;
+    height: 40%;
+    background-color: white;
+    color: #26251C;
+    border-radius: 8px;
+    border: 1px solid white;
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.btn_login:hover {
+    background-color: #DB4B23;
+    color: white;
+    border: 1px solid #DB4B23;
+    transition: 0.5s;
+}

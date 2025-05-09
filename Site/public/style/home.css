@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+.sessao_objetivo {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color: #DB4B23;
+    height: 500px;
+    align-items: center;
+    flex-direction: row;
+}
+
+.div_banner {
+    width: 45%;
+}
+
+.div_objetivo_texto {
+    width: 45%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.titulo_texto_objetivo {
+    color: white;
+    font-size: 34px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+}
+
+.paragrafo_texto_objetivo {
+    font-size: 24px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    line-height: 1;
+    width: 100%;
+}
+
+.span_texto{
+    color: #26251C;
+    font-weight: 700;
+}
