@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+/* Cabeçalho */
 header {
     display: flex;
     justify-content: space-between;
@@ -76,4 +77,63 @@ header {
     color: white;
     border: 1px solid #DB4B23;
     transition: 0.5s;
+}
+
+/* início do rodapé */
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #26251C;
+    height: 250px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.div_rodape_links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 90%;
+}
+
+.link_rodape {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    font-family: "Inter", sans-serif;
+}
+
+.link_rodape:hover {
+    color: #DB4B23;
+    transition: 0.5s;
+}
+
+.div_rodape_redesSociais {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    align-items: center;
+}
+
+.div_siga p {
+    font-size: 22px;
+    color: white;
+    font-family: "Inter", sans-serif;
+}
+
+.div_rodape_linksRedesSociais {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.div_rodape_logo {
+    height: 90%;
+}
+
+.div_rodape_logo img {
+    height: 100%;
 }
