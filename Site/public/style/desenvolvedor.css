@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.sessao_desenvolvedor {
+    display: flex;
+    flex-direction: row;
+    background-color: #26251C;
+    border-top: 2px solid white;
+    padding: 20px;
+    gap: 15px;
+}
+
+.div_sessao_foto_redesSociais{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.div_redesSociais{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.div_redesSociais_siga p {
+    color: white;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}
+
+.div_div_redesSociais{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.div_div_redesSociais img{
+    width: 50px;
+}
+
+.div_textoSobreMim{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.div_textoSobreMim p {
+    color: white;
+    font-size: 24px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    line-height: 1.15;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+}

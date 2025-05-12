@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.sessao_historia_comeco {
+    background-color: #DB4B23;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 650px;
+    justify-content: space-around;
+}
+
+.div_sessao_historia {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 30%;
+    justify-content: space-around;
+}
+
+.titulo_historia {
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    border-bottom: 2px solid white;
+    width: 20%;
+    text-align: center;
+}
+
+.paragrafo_historia_comeco {
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+}
+
+.div_sessao_videos {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.div_video h1 {
+    color: white;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+.div_video {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sessao_historia_meio {
+    display: flex;
+    flex-direction: column;
+    background-color: #26251C;
+    justify-content: space-around;
+    height: 500px;
+    padding: 10px;
+    align-items: center;
+}
+
+.paragrafo_sessao_meio {
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+}
+
+.sessao_historia_meio img {
+    width: 200px;
+    height: 250px;
+}
+
+.sessao_historia_fim {
+    background-color: #DB4B23;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    height: 250px;
+}
+
+.sessao_historia_fim p {
+    color: white;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+
+.sessao_chamadaAcao {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.div_card_chamadaAcao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    border: 1px solid #26251C;
+    border-radius: 8px;
+    padding: 30px 10px;
+    justify-content: space-between;
+    height: 350px;
+    gap: 15px;
+}
+
+.div_card_chamadaAcao h1 {
+    color: #26251C;
+    font-size: 26px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+}
+
+.div_paragrafos_chamadaAcao {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.div_paragrafos_chamadaAcao p {
+    font-size: 22px;
+    color: #26251C;
+    font-family: "Inter", sans-serif;
+}
+
+.div_paragrafos_chamadaAcao img {
+    width: 24px;
+}
+
+.paragrafo_bastaVoce,
+.paragrafo_OU {
+    font-size: 26px;
+    font-family: "Inter", sans-serif;
+    color: #26251C;
+    font-weight: 600;
+}
+
+.div_card_chamadaAcao button {
+    width: 40%;
+    height: 30px;
+    background-color: #DB4B23;
+    border: 1px solid #DB4B23;
+    border-radius: 8px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.div_card_chamadaAcao button:hover {
+    background-color: #26251C;
+    color: white;
+    transition: 0.5s;
+    border: 1px solid #26251C;
+}
