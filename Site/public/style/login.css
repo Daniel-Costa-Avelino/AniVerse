@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.sessao_formulario {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.div_sessao_formulario {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    border: 1px solid #26251C;
+    box-shadow: 10px 35px 15px -17px #26251C;
+}
+
+.div_banner_login {
+    width: 50%;
+    height: 10%;
+}
+
+.div_banner_login img {
+    height: 100%;
+    width: 100%;
+}
+
+.div_formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    align-items: center;
+}
+
+.div_titulo_login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid #DB4B23;
+    gap: 10px;
+}
+
+.div_titulo_login h1 {
+    color: #DB4B23;
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.div_titulo_login img {
+    width: 50px;
+}
+
+.div_campos_login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40%;
+    width: 70%;
+}
+
+.div_campo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid #26251C;
+    padding-bottom: 5px;
+}
+
+.div_campo img {
+    width: 30px;
+}
+
+.div_campo input {
+    border: 1px solid white;
+    text-align: center;
+    color: #26251C;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    outline: none;
+}
+
+.div_campo input::placeholder {
+    color: #26251C;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}
+
+.div_login_entrar {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 20%;
+}
+
+.div_login_entrar button {
+    width: 70%;
+    height: 40%;
+    background-color: #DB4B23;
+    border: 1px solid #DB4B23;
+    border-radius: 8px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.div_login_entrar button:hover {
+    color: white;
+    background-color: #26251C;
+    border: 1px solid #26251C;
+    transition: 0.5s;
+}
+
+.div_login_entrar p {
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    color: #26251C;
+}
+
+.div_login_entrar span {
+    color: #DB4B23;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+}
