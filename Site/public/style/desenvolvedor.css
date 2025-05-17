@@ -6,7 +6,7 @@
     background-color: #26251C;
     border-top: 2px solid white;
     padding: 20px;
-    gap: 15px;
+    justify-content: space-around;
 }
 
 .div_sessao_foto_redesSociais{
@@ -14,6 +14,20 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    width: 30%;
+    justify-content: center;
+}
+
+.div_foto{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.div_foto img{
+    width: 80%;
+    height: 100%;
 }
 
 .div_redesSociais{
@@ -21,12 +35,16 @@
     flex-direction: column;
     gap: 12px;
     align-items: center;
+    width: 80%;
+    justify-content: center;
+    text-align: center;
 }
 
 .div_redesSociais_siga p {
     color: white;
     font-size: 18px;
     font-family: "Inter", sans-serif;
+    text-align: center;
 }
 
 .div_div_redesSociais{
@@ -44,14 +62,13 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 60%;
 }
 
 .div_textoSobreMim p {
     color: white;
-    font-size: 24px;
+    font-size: 22px;
     font-family: "Inter", sans-serif;
     font-weight: 500;
     line-height: 1.15;
-    word-spacing: 1px;
-    letter-spacing: 1px;
 }

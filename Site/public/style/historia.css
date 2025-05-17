@@ -108,6 +108,7 @@
     justify-content: space-between;
     height: 350px;
     gap: 15px;
+    box-shadow: 15px 15px 20px -17px #26251C;
 }
 
 .div_card_chamadaAcao h1 {

@@ -105,11 +105,13 @@
 .div_card_historia {
     background-color: #26251C;
     border: 1px solid #26251C;
+    box-shadow: 15px 15px 20px -17px #26251C;
 }
 
 .div_card_recomendacoes {
     background-color: #DB4B23;
     border: 1px solid #DB4B23;
+    box-shadow: 15px 15px 20px -17px #26251C;
 }
 
 .card h1 {
@@ -173,6 +175,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 15px;
 }
 
 .div_card_chamadaAcao {
@@ -186,6 +189,7 @@
     justify-content: space-between;
     height: 350px;
     gap: 15px;
+    box-shadow: 15px 15px 20px -17px #26251C;
 }
 
 .div_card_chamadaAcao h1 {
@@ -213,14 +217,15 @@
     width: 24px;
 }
 
-.paragrafo_bastaVoce, .paragrafo_OU{
+.paragrafo_bastaVoce,
+.paragrafo_OU {
     font-size: 26px;
     font-family: "Inter", sans-serif;
     color: #26251C;
     font-weight: 600;
 }
 
-.div_card_chamadaAcao button{
+.div_card_chamadaAcao button {
     width: 40%;
     height: 30px;
     background-color: #DB4B23;
@@ -232,7 +237,7 @@
     font-weight: 600;
 }
 
-.div_card_chamadaAcao button:hover{
+.div_card_chamadaAcao button:hover {
     background-color: #26251C;
     color: white;
     transition: 0.5s;

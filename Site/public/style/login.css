@@ -128,9 +128,10 @@
     color: #26251C;
 }
 
-.div_login_entrar span {
+.div_login_entrar a {
     color: #DB4B23;
     font-size: 18px;
     font-family: "Inter", sans-serif;
     font-weight: 700;
+    text-decoration: none;
 }
