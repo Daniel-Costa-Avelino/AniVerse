@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="./style/reset.css">
     <link rel="stylesheet" href="./style/global.css">
     <link rel="stylesheet" href="./style/login.css">
+
+    <script src="./js/sessao.js"></script>
+
 </head>
 
 <body>
@@ -42,25 +45,110 @@
                 <div class="div_campos_login">
                     <div class="div_campo">
                         <img src="./assets/iconeEmailLogin.png" alt="Ícone de E-mail">
-                        <input type="text" placeholder="E-mail">
+                        <input type="text" placeholder="E-mail" id="input_email">
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeUser.png" alt="Ícone de Username">
-                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Username" id="input_username">
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeSenha.png" alt="Ícone de senha">
-                        <input type="password" placeholder="Senha">
+                        <input type="password" placeholder="Senha" id="input_senha">
                     </div>
                 </div>
                 <div class="div_login_entrar">
-                    <button class="btn_entrar">Entrar</button>
+                    <button class="btn_entrar" onclick="entrar()">Entrar</button>
                     <p>Não possui uma conta? <a href="./cadastro.html">Cadastre-se</a></p>
                 </div>
             </div>
         </div>
     </section>
 
+    <div id="div_erros_login"></div>
+    <div id="div_aguardar" class="loading-div">
+        <img src="./assets/circle-loading.gif" id="loading-gif">
+    </div>
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
 </body>
 
 </html>
+
+<script>
+
+
+    function entrar() {
+        aguardar();
+
+        var usernameVar = input_username.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar == "" || senhaVar == "" || usernameVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                usernameServer: usernameVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.NOME_USUARIO = json.username;
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    setTimeout(function () {
+                        window.location.href = "/perfil.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

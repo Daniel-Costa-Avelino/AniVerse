@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="./style/reset.css">
     <link rel="stylesheet" href="./style/global.css">
     <link rel="stylesheet" href="./style/cadastro.css">
+
+    <script src="./js/sessao.js"></script>
+
 </head>
 
 <body>
@@ -41,28 +44,117 @@
                 <div class="div_campos_login">
                     <div class="div_campo">
                         <img src="./assets/iconeEmailLogin.png" alt="Ícone de E-mail">
-                        <input type="text" placeholder="E-mail">
+                        <input type="text" placeholder="E-mail" id="input_email">
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeUser.png" alt="Ícone de Username">
-                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Username" id="input_username">
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeSenha.png" alt="Ícone de senha">
-                        <input type="password" placeholder="Senha">
+                        <input type="password" placeholder="Senha" id="input_senha">
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeSenha.png" alt="Ícone de senha">
-                        <input type="password" placeholder="Confirmar senha">
+                        <input type="password" placeholder="Confirmar senha" id="input_confirmarSenha">
                     </div>
                 </div>
                 <div class="div_login_entrar">
-                    <button class="btn_entrar">Cadastrar</button>
+                    <button class="btn_entrar" onclick="cadastrar()">Cadastrar</button>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+    <div id="div_aguardar" class="loading-div">
+        <img src="./assets/circle-loading.gif" id="loading-gif" />
+    </div>
+
+    <div id="div_erros_login"></div>
+
+
 </body>
 
 </html>
+
+
+<script>
+
+    function cadastrar() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+
+        var emailVar = input_email.value
+        var usernameVar = input_username.value
+        var senhaVar = input_senha.value
+        var confirmacaoSenhaVar = input_confirmarSenha.value
+
+        // Verificando se há algum campo em branco
+        if (
+            usernameVar == "" ||
+            emailVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == ""
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "(Mensagem de erro para todos os campos em branco)";
+
+            finalizarAguardar();
+            return false;
+        } else {
+            setInterval(sumirMensagem, 5000);
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                usernameServer: usernameVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+                    finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
+</script>
