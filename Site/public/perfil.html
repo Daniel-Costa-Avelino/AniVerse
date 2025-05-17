@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/global.css">
+    <link rel="stylesheet" href="style/perfil.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+        <div class="div_logo">
+            <img src="./assets/logo.png" alt="Logo do site">
+        </div>
+        <div class="div_links">
+            <a href="index.html" class="link">Home</a>
+            <a href="recomendacoes.html" class="link">Recomendações</a>
+            <a href="historia.html" class="link">História do anime</a>
+            <a href="desenvolvedor.html" class="link">Desenvolvedor</a>
+        </div>
+        <div class="div_login">
+            <button class="btn_login">Login</button>
+        </div>
+    </header>
+    <!-- Fim do cabeçalho -->
+
+    <section class="sessao_perfil">
+        <div class="div_infos">
+            <div class="div_avatar">
+                <img src="./assets/avatar.png" alt="Avatar do usuário">
+            </div>
+            <div class="div_infos_pessoal">
+                <p><span class="span_p_infos">Username: </span>Naruto123</p>
+                <p><span class="span_p_infos">Idade: </span>18</p>
+                <p><span class="span_p_infos">Gênero: </span>Masculino</p>
+            </div>
+            <div class="div_infos_anime_lista">
+                <p><span class="span_p_infos">Anime preferido: </span>Naruto</p>
+                <p><span class="span_p_infos">Último anime adicionado: </span>One Piece</p>
+                <p><span class="span_p_infos">Animes adicionados: </span>23</p>
+            </div>
+        </div>
+        <div class="div_links_dashboard_editar">
+            <button class="btn_acessarDash">Acessar Dashboard</button>
+            <button class="btn_editar">
+                <img src="./assets/iconeEditar.png" alt="Ícone de Editar">
+                Editar
+            </button>
+        </div>
+    </section>
+
+    <section class="sessao_ordenar">
+        <h1 class="titulo_ordenar">Ordenar por:</h1>
+        <div class="div_selects_ordenar">
+            <select name="select_genero" id="select_ordenarGenero">
+                <option value="#">Selecione um gênero</option>
+                <option value="terror">Terror</option>
+                <option value="comedia">Comédia</option>
+                <option value="aventura">Aventura</option>
+                <option value="fantasia">Fantasia</option>
+                <option value="romance">Romance</option>
+            </select>
+
+            <select name="select_ordem" id="select_ordemAlfabetica">
+                <option value="#">Ordem alfabética</option>
+                <option value="crescente">Crescente</option>
+                <option value="decrescente">Decrescente</option>
+            </select>
+
+            <select name="select_data" id="select_datalancamento">
+                <option value="#">Data de lançamento</option>
+                <option value="atual">Mais atual</option>
+                <option value="antigo">Mais antigo</option>
+            </select>
+
+            <button class="btn_filtrar">
+                <img src="./assets/iconeFiltro.png" alt="Icone de filtro">
+                Filtrar
+            </button>
+        </div>
+    </section>
+
+    <section class="sessao_animesAssistidos">
+        <div class="div_titulo_lista">
+            <h1>
+                Lista dos seus animes assistidos
+            </h1>
+        </div>
+
+        <div class="div_btn_adicionar_anime">
+            <button>
+                <img src="./assets/iconeAdicionar.png" alt="Ícone de adicionar">
+                <p>Adicionar novo anime</p>
+            </button>
+        </div>
+
+        <div class="div_lista_animes">
+            <div class="card_anime_assistido">
+                <div class="div_img_anime">
+                    <img src="./assets/imgCard.png" alt="Imagem do anime">
+                </div>
+                <div class="div_infos_anime">
+                    <h1 class="titulo_anime">Demon slayer</h1>
+                    <p class="p_descricao"><span class="span_destaque">Descrição: </span>Tanjiro Kamado, um jovem que se
+                        torna um caçador de demônios após sua família ser
+                        massacrada e sua irmã Nezuko ser transformada em um demônio. Ele embarca em uma jornada para
+                        encontrar uma cura para Nezuko e vingar sua família, lutando contra criaturas demoníacas e
+                        outras
+                        ameaças. A série também explora temas como família, amizade, redenção e o poder de superar a
+                        adversidade.</p>
+                    <p class="p_temporadas"><span class="span_destaque">Temporadas:</span> 4</p>
+                    <p class="p_episodios"><span class="span_destaque">Episódios:</span> 63</p>
+                    <p class="p_nota_usuario"><span class="span_destaque">Nota do usuário:</span> 4.5</p>
+                    <p class="p_genero_anime"><span class="span_destaque">Gênero:</span> Luta</p>
+                    <p class="p_onde_assistir"><span class="span_destaque">Onde assistir:</span> Crunchyroll</p>
+                    <p class="p_periodo"><span class="span_destaque">Período de exibição:</span></p>
+                    <p class="p_data_lancamento"><span class="span_destaque">Data de lançamento:</span> 06 de Abril de
+                        2019
+                    </p>
+                    <p class="p_data_ultimo_episodio"><span class="span_destaque">Último episódio lançado:</span> 30 de
+                        Junho de 2024</p>
+                </div>
+            </div>
+            <div class="card_anime_assistido">
+                <div class="div_img_anime">
+                    <img src="./assets/imgCard.png" alt="Imagem do anime">
+                </div>
+                <div class="div_infos_anime">
+                    <h1 class="titulo_anime">Demon slayer</h1>
+                    <p class="p_descricao"><span class="span_destaque">Descrição: </span>Tanjiro Kamado, um jovem que se
+                        torna um caçador de demônios após sua família ser
+                        massacrada e sua irmã Nezuko ser transformada em um demônio. Ele embarca em uma jornada para
+                        encontrar uma cura para Nezuko e vingar sua família, lutando contra criaturas demoníacas e
+                        outras
+                        ameaças. A série também explora temas como família, amizade, redenção e o poder de superar a
+                        adversidade.</p>
+                    <p class="p_temporadas"><span class="span_destaque">Temporadas:</span> 4</p>
+                    <p class="p_episodios"><span class="span_destaque">Episódios:</span> 63</p>
+                    <p class="p_nota_usuario"><span class="span_destaque">Nota do usuário:</span> 4.5</p>
+                    <p class="p_genero_anime"><span class="span_destaque">Gênero:</span> Luta</p>
+                    <p class="p_onde_assistir"><span class="span_destaque">Onde assistir:</span> Crunchyroll</p>
+                    <p class="p_periodo"><span class="span_destaque">Período de exibição:</span></p>
+                    <p class="p_data_lancamento"><span class="span_destaque">Data de lançamento:</span> 06 de Abril de
+                        2019
+                    </p>
+                    <p class="p_data_ultimo_episodio"><span class="span_destaque">Último episódio lançado:</span> 30 de
+                        Junho de 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="div_rodape_logo">
+            <img src="./assets/logoGrande.png" alt="Logo do site">
+        </div>
+        <div class="div_rodape_links">
+            <a href="index.html" class="link_rodape">Home</a>
+            <a href="recomendacoes.html" class="link_rodape">Recomendações</a>
+            <a href="desenvolvedor.html" class="link_rodape">Desenvolvedor</a>
+            <a href="historia.html" class="link_rodape">História</a>
+            <a href="login.html" class="link_rodape">Login</a>
+            <a href="cadastro.html" class="link_rodape">Cadastro</a>
+        </div>
+        <div class="div_rodape_redesSociais">
+            <div class="div_siga">
+                <p>Siga-nos nas redes sociais</p>
+            </div>
+            <div class="div_rodape_linksRedesSociais">
+                <img src="./assets/imgFacebook.png" alt="ícone facebook">
+                <img src="./assets/Twitter.png" alt="Ícone twitter">
+            </div>
+            <div class="div_rodape_linksRedesSociais">
+                <img src="./assets/imgInstagram.png" alt="Ícone instagram">
+                <img src="./assets/Discord.png" alt="Ícone discord">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fim rodapé -->
+
+</body>
+
+</html>
