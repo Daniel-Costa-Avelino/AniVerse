@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+    background-color: #26251C;
+}
+
+.cabecalho_dashboard {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    height: 270px;
+    border-bottom: 1px solid white;
+}
+
+.div_perfilUsuario {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 50%;
+}
+
+.div_perfilUsuario img {
+    width: 40%;
+}
+
+.div_perfilUsuario p {
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.div_voltar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    justify-content: space-around;
+    width: 17%;
+}
+
+.div_voltar a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    align-self: flex-start;
+    border-bottom: 1px solid white;
+}
+
+.div_voltar img {
+    align-self: flex-start;
+    width: 10%;
+}
+
+#sessao_indicadores {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    flex-direction: row;
+}
+
+.card_indicadores {
+    width: 22%;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    height: 70px;
+}
+
+.p_titulo_card {
+    color: #26251C;
+    font-size: 22px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+}
+
+.p_paragrafo_indicador {
+    color: #26251C;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.sessao_graficos_menores {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+
+.sessao_graficos_menores div {
+    width: 40%;
+    background-color: white;
+    border-radius: 8px;
+    height: 270px;
+}
+
+.sessao_grafico_maior {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.sessao_grafico_maior div {
+    width: 80%;
+    background-color: white;
+    border-radius: 8px;
+    height: 400px;
+}

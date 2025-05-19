@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/dashboard.css">
+</head>
+
+<body>
+
+    <header class="cabecalho_dashboard">
+        <div class="div_perfilUsuario">
+            <img src="./assets/avatar.png" alt="Imagem de avatar">
+            <p id="p_nomeUsuario">Olá, Daniel Costa</p>
+        </div>
+        <div class="div_voltar">
+            <img src="./assets/iconeVoltar.png" alt="Ícone de voltar">
+            <a href="./perfil.html">Voltar para perfil</a>
+        </div>
+    </header>
+
+    <section id="sessao_indicadores">
+        <div id="card_ranking" class="card_indicadores">
+            <p class="p_titulo_card">Ranking:</p>
+            <p id="p_ranking" class="p_paragrafo_indicador">05°</p>
+        </div>
+        <div id="card_genero_mais_assistido" class="card_indicadores">
+            <p class="p_titulo_card">Gênero mais assistido:</p>
+            <p id="p_generoMaisAssistido" class="p_paragrafo_indicador">Comédia</p>
+        </div>
+        <div id="card_tempo_assistido" class="card_indicadores">
+            <p class="p_titulo_card">Tempo assistido ao todo:</p>
+            <p id="p_tempo_assistido" class="p_paragrafo_indicador">1000 minutos</p>
+        </div>
+    </section>
+
+    <section class="sessao_graficos_menores">
+        <div id="div_grafico_qtdAnimesPorGenero">
+            GRAFICO QTD ANIMES POR GENERO
+        </div>
+        <div id="div_grafico_qtdAnimes_assistidosAnoVigente">
+            GRAFICO QTD ANIMES ASSISTIDOS QUE FORAM LANÇADOS NO ANO VIGENTE
+        </div>
+    </section>
+
+    <section class="sessao_grafico_maior">
+        <div id="div_grafico_horasAssistidasPorAnime">
+            GRAFICO QTD HORAS ASSISTIDAS POR ANIME
+        </div>
+    </section>
+
+</body>
+
+</html>
