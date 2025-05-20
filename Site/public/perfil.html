@@ -46,7 +46,10 @@
             </div>
         </div>
         <div class="div_links_dashboard_editar">
-            <button class="btn_acessarDash" onclick="window.location.href = './dashboard.html'">Acessar Dashboard</button>
+            <button class="btn_acessarDash" onclick="window.location.href = './dashboard.html'">Acessar
+                Dashboard</button>
+            <button class="btn_acessarDash" onclick="window.location.href = './recomendacoes.html'">Acessar
+                recomendações</button>
             <button class="btn_editar">
                 <img src="./assets/iconeEditar.png" alt="Ícone de Editar">
                 Editar
@@ -93,7 +96,7 @@
         </div>
 
         <div class="div_btn_adicionar_anime">
-            <button>
+            <button onclick="mostrarModal()">
                 <img src="./assets/iconeAdicionar.png" alt="Ícone de adicionar">
                 <p>Adicionar novo anime</p>
             </button>
@@ -182,9 +185,86 @@
             </div>
         </div>
     </footer>
-
     <!-- Fim rodapé -->
+
+    <section id="section_modal">
+        <div class="div_form_add_anime">
+            <div class="div_header_modal">
+                <h1 class="titulo_form">Adicionar o anime assistido</h1>
+                <img src="./assets/fecharModal.png" alt="Icone fechar modal" id="imgFecharModal" onclick="fecharModal()">
+            </div>
+
+            <div class="div_campo">
+                <p class="p_campo">Nome:</p>
+                <input type="text" id="input_nomeAnime" placeholder="Digite o nome do anime">
+            </div>
+            <div class="div_campo">
+                <p class="p_campo">Descrição:</p>
+                <input type="text" id="input_descricao" placeholder="Digite a descrição do anime">
+            </div>
+            <div class="div_campo">
+                <p class="p_campo">Imagem:</p>
+                <input type="text" id="input_descricao" placeholder="Digite o endereço da imagem do Anime">
+            </div>
+            <div class="div_campo_temporadas_episodios">
+                <div class="div_campo">
+                    <p class="p_campo">Temporadas:</p>
+                    <input type="text" id="input_temporadasAnime" placeholder="Digite a quantidade de temporadas">
+                </div>
+
+                <div class="div_campo">
+                    <p class="p_campo">Episódios:</p>
+                    <input type="text" id="input_episodiosAnime" placeholder="Digite a quantidade de episódios">
+                </div>
+            </div>
+
+            <div class="div_campo">
+                <p class="p_campo">Onde assistir:</p>
+                <input type="text" id="input_ondeAssistirAnime" placeholder="Digite onde pode ver esse anime">
+            </div>
+            <div class="div_datas">
+                <div class="div_campo">
+                    <p class="p_campo">Data de lançamento:</p>
+                    <input type="text" id="input_dtLancamentoAnime" placeholder="Data de lançamento do anime">
+                </div>
+                <div class="div_campo">
+                    <p class="p_campo">Data do último episódio lançado:</p>
+                    <input type="text" id="input_dtLancamentoAnime" placeholder="Digite a data do último do anime">
+                </div>
+            </div>
+
+            <div class="div_campo">
+                <p class="p_campo">Gênero:</p>
+                <input type="text" id="input_generoAnime" placeholder="Digite o gênero do anime">
+            </div>
+            <div class="div_campo">
+                <p class="p_campo">Classificação indicativa:</p>
+                <input type="text" id="input_classificacaoIndicativaAnime"
+                    placeholder="Digite a classificação indicativa do anime">
+            </div>
+            <div class="div_campo">
+                <p class="p_campo">Sua nota:</p>
+                <input type="text" id="input_notaAnime" placeholder="Digite a sua nota para o anime">
+            </div>
+            <div class="div_campo">
+                <button class="btn_adicionar">Adicionar</button>
+            </div>
+        </div>
+    </section>
+
 
 </body>
 
 </html>
+
+<script>
+
+    function mostrarModal() {
+        section_modal.style.display = "flex";
+    }
+
+    function fecharModal() {
+        section_modal.style.display = "none";
+    }
+
+</script>

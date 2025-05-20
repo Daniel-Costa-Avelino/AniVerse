@@ -63,6 +63,7 @@
     padding: 10px;
     font-family: "Inter", sans-serif;
     font-size: 18px;
+    border: 1px solid #26251C;
 }
 
 .btn_filtrar {

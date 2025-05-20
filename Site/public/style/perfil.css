@@ -83,7 +83,7 @@
     background-color: #26251C;
     border: 1px solid #26251C;
     border-radius: 8px;
-    width: 15%;
+    width: 20%;
     height: 100%;
     text-align: center;
     padding: 8px;
@@ -125,6 +125,7 @@
     font-family: "Inter", sans-serif;
     font-size: 18px;
     text-align: center;
+    border: 1px solid #26251C;
 }
 
 .btn_filtrar {
@@ -260,4 +261,106 @@
 
 .p_periodo {
     text-align: center;
+}
+
+#section_modal {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    flex-direction: row;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.div_form_add_anime {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #26251C;
+    border-radius: 8px;
+    padding: 15px 0px;
+    justify-content: space-between;
+    height: 600px;
+    text-align: center;
+    background-color: white;
+}
+
+.div_form_add_anime h1 {
+    color: #26251C;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+}
+
+.div_campo {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.p_campo {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    color: #26251C;
+}
+
+.div_campo input {
+    width: 90%;
+    height: 20px;
+    padding: 2px;
+    color: #26251C;
+    font-family: "Inter", sans-serif;
+    border: 1px solid #26251C;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.div_campo input::placeholder {
+    color: #26251C;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    text-align: center;
+}
+
+.div_campo_temporadas_episodios,
+.div_datas {
+    display: flex;
+}
+
+.btn_adicionar {
+    width: 40%;
+    background-color: #26251C;
+    color: white;
+    border: 1px solid #26251C;
+    border-radius: 8px;
+    height: 40px;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}
+
+.div_header_modal {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    position: relative;
+}
+
+#imgFecharModal {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    width: 25px;
+}
+
+#imgFecharModal:hover {
+    width: 30px;
 }
