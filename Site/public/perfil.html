@@ -191,7 +191,8 @@
         <div class="div_form_add_anime">
             <div class="div_header_modal">
                 <h1 class="titulo_form">Adicionar o anime assistido</h1>
-                <img src="./assets/fecharModal.png" alt="Icone fechar modal" id="imgFecharModal" onclick="fecharModal()">
+                <img src="./assets/fecharModal.png" alt="Icone fechar modal" id="imgFecharModal"
+                    onclick="fecharModal()">
             </div>
 
             <div class="div_campo">
@@ -204,7 +205,7 @@
             </div>
             <div class="div_campo">
                 <p class="p_campo">Imagem:</p>
-                <input type="text" id="input_descricao" placeholder="Digite o endereço da imagem do Anime">
+                <input type="text" id="input_imagem" placeholder="Digite o endereço da imagem do Anime">
             </div>
             <div class="div_campo_temporadas_episodios">
                 <div class="div_campo">
@@ -225,11 +226,12 @@
             <div class="div_datas">
                 <div class="div_campo">
                     <p class="p_campo">Data de lançamento:</p>
-                    <input type="text" id="input_dtLancamentoAnime" placeholder="Data de lançamento do anime">
+                    <input type="date" id="input_dtLancamentoAnime" placeholder="Data de lançamento do anime">
                 </div>
                 <div class="div_campo">
                     <p class="p_campo">Data do último episódio lançado:</p>
-                    <input type="text" id="input_dtLancamentoAnime" placeholder="Digite a data do último do anime">
+                    <input type="date" id="input_dtLancamentoAnimeUltimoEpisodio"
+                        placeholder="Digite a data do último do anime">
                 </div>
             </div>
 
@@ -247,7 +249,7 @@
                 <input type="text" id="input_notaAnime" placeholder="Digite a sua nota para o anime">
             </div>
             <div class="div_campo">
-                <button class="btn_adicionar">Adicionar</button>
+                <button class="btn_adicionar" onclick="adicionarAnime()">Adicionar</button>
             </div>
         </div>
     </section>
@@ -266,5 +268,102 @@
     function fecharModal() {
         section_modal.style.display = "none";
     }
+
+    function adicionarAnime() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+
+        var nomeAnime = input_nomeAnime.value;
+        var descricao = input_descricao.value;
+        var imagem = input_imagem.value;
+        var temporadasAnime = Number(input_temporadasAnime.value);
+        var episodiosAnime = Number(input_episodiosAnime.value);
+        var ondeAssistirAnime = input_ondeAssistirAnime.value;
+        var dtLancamentoAnime = input_dtLancamentoAnime.value;
+        var dtLancamentoAnimeUltimoEpisodio = input_dtLancamentoAnimeUltimoEpisodio.value;
+        var generoAnime = input_generoAnime.value;
+        var classificacaoIndicativaAnime = Number(input_classificacaoIndicativaAnime.value);
+        var notaAnime = Number(input_notaAnime.value);
+        var idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+        // Verificando se há algum campo em branco
+        if (
+            nomeAnime == '' ||
+            descricao == '' ||
+            imagem == '' ||
+            temporadasAnime == '' ||
+            episodiosAnime == '' ||
+            ondeAssistirAnime == '' ||
+            dtLancamentoAnime == '' ||
+            dtLancamentoAnime == '' ||
+            generoAnime == '' ||
+            classificacaoIndicativaAnime == '' ||
+            notaAnime == '' ||
+            idUsuario == '' 
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "(Mensagem de erro para todos os campos em branco)";
+
+            //finalizarAguardar();
+            return false;
+        } else {
+            //setInterval(sumirMensagem, 5000);
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/adicionarAnime", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeAnimeServer: nomeAnime,
+                descricaoServer: descricao,
+                imagemServer: imagem,
+                temporadasAnimeServer: temporadasAnime,
+                episodiosAnimeServer: episodiosAnime,
+                ondeAssistirAnimeServer: ondeAssistirAnime,
+                dtLancamentoAnimeServer: dtLancamentoAnime,
+                dtLancamentoAnimeUltimoEpisodioServer: dtLancamentoAnimeUltimoEpisodio,
+                generoAnimeServer: generoAnime,
+                classificacaoIndicativaAnimeServer: classificacaoIndicativaAnime,
+                notaAnimeServer: notaAnime,
+                idUsuarioServer: idUsuario
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    //cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML =
+                        "Anime adicionado com sucesso!";
+
+                    // setTimeout(() => {
+                    //     window.location = "login.html";
+                    // }, "2000");
+
+                    //finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                //finalizarAguardar();
+            });
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none";
+    // }
 
 </script>
