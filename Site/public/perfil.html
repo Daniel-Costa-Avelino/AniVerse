@@ -102,8 +102,8 @@
             </button>
         </div>
 
-        <div class="div_lista_animes">
-            <div class="card_anime_assistido">
+        <div class="div_lista_animes" id="div_lista_de_animes">
+            <!-- <div class="card_anime_assistido">
                 <div class="div_img_anime">
                     <img src="./assets/imgCard.png" alt="Imagem do anime">
                 </div>
@@ -128,33 +128,7 @@
                     <p class="p_data_ultimo_episodio"><span class="span_destaque">Último episódio lançado:</span> 30 de
                         Junho de 2024</p>
                 </div>
-            </div>
-            <div class="card_anime_assistido">
-                <div class="div_img_anime">
-                    <img src="./assets/imgCard.png" alt="Imagem do anime">
-                </div>
-                <div class="div_infos_anime">
-                    <h1 class="titulo_anime">Demon slayer</h1>
-                    <p class="p_descricao"><span class="span_destaque">Descrição: </span>Tanjiro Kamado, um jovem que se
-                        torna um caçador de demônios após sua família ser
-                        massacrada e sua irmã Nezuko ser transformada em um demônio. Ele embarca em uma jornada para
-                        encontrar uma cura para Nezuko e vingar sua família, lutando contra criaturas demoníacas e
-                        outras
-                        ameaças. A série também explora temas como família, amizade, redenção e o poder de superar a
-                        adversidade.</p>
-                    <p class="p_temporadas"><span class="span_destaque">Temporadas:</span> 4</p>
-                    <p class="p_episodios"><span class="span_destaque">Episódios:</span> 63</p>
-                    <p class="p_nota_usuario"><span class="span_destaque">Nota do usuário:</span> 4.5</p>
-                    <p class="p_genero_anime"><span class="span_destaque">Gênero:</span> Luta</p>
-                    <p class="p_onde_assistir"><span class="span_destaque">Onde assistir:</span> Crunchyroll</p>
-                    <p class="p_periodo"><span class="span_destaque">Período de exibição:</span></p>
-                    <p class="p_data_lancamento"><span class="span_destaque">Data de lançamento:</span> 06 de Abril de
-                        2019
-                    </p>
-                    <p class="p_data_ultimo_episodio"><span class="span_destaque">Último episódio lançado:</span> 30 de
-                        Junho de 2024</p>
-                </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -261,6 +235,8 @@
 
 <script>
 
+    window.onload = exibirAnime();
+
     function mostrarModal() {
         section_modal.style.display = "flex";
     }
@@ -301,7 +277,7 @@
             generoAnime == '' ||
             classificacaoIndicativaAnime == '' ||
             notaAnime == '' ||
-            idUsuario == '' 
+            idUsuario == ''
         ) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML =
@@ -314,7 +290,7 @@
         }
 
         // Enviando o valor da nova input
-        fetch("/usuarios/adicionarAnime", {
+        fetch("/perfil/adicionarAnime", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -342,8 +318,8 @@
                 if (resposta.ok) {
                     //cardErro.style.display = "block";
 
-                    mensagem_erro.innerHTML =
-                        "Anime adicionado com sucesso!";
+                    // mensagem_erro.innerHTML =
+                    //     "Anime adicionado com sucesso!";
 
                     // setTimeout(() => {
                     //     window.location = "login.html";
@@ -366,4 +342,93 @@
     //     cardErro.style.display = "none";
     // }
 
+
+    function exibirAnime() {
+        //aguardar();
+
+        var idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+        if (idUsuario == undefined) {
+            //cardErro.style.display = "block"
+            //mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            //finalizarAguardar();
+            alert("usuario undefined")
+            return false;
+        }
+        else {
+            //setInterval(sumirMensagem, 5000)
+        }
+
+        fetch("/exibirAnime/exibirAnimesAssistidos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuarioServer: idUsuario
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    for (var i = 0; i < json.length; i++) {
+
+                        var dataLancamentoAnime = new Date(json[i].dtLancamento);
+                        var dataLancamentoAnimeFormatada = dataLancamentoAnime.toLocaleDateString('pt-BR');
+
+                        var dataUltimoEpLancado = new Date(json[i].dtUltimoEpLancado);
+                        var dataUltimoEpLancadoFormatada = dataUltimoEpLancado.toLocaleDateString('pt-BR');
+
+                        div_lista_de_animes.innerHTML += `
+                        <div class="card_anime_assistido">
+                <div class="div_img_anime">
+                    <img src=${json[i].imagemAnime} alt="Imagem do anime">
+                </div>
+                <div class="div_infos_anime">
+                    <h1 class="titulo_anime">${json[i].nome}</h1>
+                    <p class="p_descricao"><span class="span_destaque">Descrição: </span>
+                        ${json[i].descricao}</p>
+                    <p class="p_temporadas"><span class="span_destaque">Temporadas:</span> 
+                        ${json[i].temporadas}</p>
+                    <p class="p_episodios"><span class="span_destaque">Episódios:</span> 
+                        ${json[i].episodios}</p>
+                    <p class="p_nota_usuario"><span class="span_destaque">Nota do usuário:</span>
+                        ${json[i].notaUser}</p>
+                    <p class="p_genero_anime"><span class="span_destaque">Gênero:</span> 
+                        ${json[i].genero}</p>
+                    <p class="p_onde_assistir"><span class="span_destaque">Onde assistir:</span>
+                         ${json[i].onde_assistir}</p>
+                    <p class="p_periodo"><span class="span_destaque">Período de exibição:</span></p>
+                    <p class="p_data_lancamento"><span class="span_destaque">Data de lançamento:</span>
+                        ${dataLancamentoAnimeFormatada}
+                    </p>
+                    <p class="p_data_ultimo_episodio"><span class="span_destaque">Último episódio lançado:</span> 
+                        ${dataUltimoEpLancadoFormatada}</p>
+                </div>
+            </div>
+                        `;
+                    }
+                });
+            } else {
+
+                console.log("Houve um erro ao tentar exibir os animes!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    //finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
 </script>

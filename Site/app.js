@@ -18,6 +18,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var perfilRouter = require("./src/routes/perfil");
+var exibirAnimeRouter = require("./src/routes/exibirAnime");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,7 +28,8 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/usuarios", perfilRouter);
+app.use("/perfil", perfilRouter);
+app.use("/exibirAnime", exibirAnimeRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
