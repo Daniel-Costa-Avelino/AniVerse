@@ -35,14 +35,14 @@
                 <img src="./assets/avatar.png" alt="Avatar do usuário">
             </div>
             <div class="div_infos_pessoal">
-                <p><span class="span_p_infos">Username: </span>Naruto123</p>
-                <p><span class="span_p_infos">Idade: </span>18</p>
-                <p><span class="span_p_infos">Gênero: </span>Masculino</p>
+                <p><span class="span_p_infos" id="p_username">Username: </span></p>
+                <p><span class="span_p_infos" id="p_idade">Idade: </span></p>
+                <p><span class="span_p_infos" id="p_generoUsuario">Gênero: </span></p>
             </div>
             <div class="div_infos_anime_lista">
-                <p><span class="span_p_infos">Anime preferido: </span>Naruto</p>
-                <p><span class="span_p_infos">Último anime adicionado: </span>One Piece</p>
-                <p><span class="span_p_infos">Animes adicionados: </span>23</p>
+                <p><span class="span_p_infos" id="p_animePreferido">Anime preferido: </span></p>
+                <p><span class="span_p_infos" id="p_ultimoAnimeAdicionado">Último anime adicionado: </span></p>
+                <p><span class="span_p_infos" id="p_qtdAnimesAdicionados">Animes adicionados: </span></p>
             </div>
         </div>
         <div class="div_links_dashboard_editar">
@@ -50,7 +50,7 @@
                 Dashboard</button>
             <button class="btn_acessarDash" onclick="window.location.href = './recomendacoes.html'">Acessar
                 recomendações</button>
-            <button class="btn_editar">
+            <button class="btn_editar" onclick="mostrarModalEditar()">
                 <img src="./assets/iconeEditar.png" alt="Ícone de Editar">
                 Editar
             </button>
@@ -228,6 +228,32 @@
         </div>
     </section>
 
+    <section id="section_modal_editar">
+        <div class="div_form_editar">
+            <div class="div_header_modal">
+                <h1 class="titulo_form">Editar suas informações</h1>
+                <img src="./assets/fecharModal.png" alt="Icone fechar modal" id="imgFecharModal"
+                    onclick="fecharModalEditar()">
+            </div>
+            <div class="div_campo">
+                <p class="p_campo">Selecione o campo para alterar:</p>
+                <select name="" id="select_campoEditar">
+                    <option value="#">Selecione um campo para editar</option>
+                    <option value="username">Username</option>
+                    <option value="idade">Idade</option>
+                    <option value="generoUsuario">Gênero</option>
+                </select>
+            </div>
+            <div class="div_campo">
+                <p class="p_campo">Insira o novo valor:</p>
+                <input type="text" id="input_valorNovo" placeholder="Digite o novo valor">
+            </div>
+            <div class="div_campo">
+                <button class="btn_editar_form" onclick="editarInfos()">Editar</button>
+            </div>
+        </div>
+    </section>
+
 
 </body>
 
@@ -243,6 +269,13 @@
 
     function fecharModal() {
         section_modal.style.display = "none";
+    }
+    function mostrarModalEditar() {
+        section_modal_editar.style.display = "flex";
+    }
+
+    function fecharModalEditar() {
+        section_modal_editar.style.display = "none";
     }
 
     function adicionarAnime() {
@@ -375,9 +408,36 @@
 
                 resposta.json().then(json => {
                     console.log(json);
+
                     console.log(JSON.stringify(json));
 
+
+                    p_username.innerHTML = `<p><span class="span_p_infos" id="p_username">Username: 
+        </span>${sessionStorage.getItem("NOME_USUARIO")}</p>`;
+
+                    p_qtdAnimesAdicionados.innerHTML =
+                        `<p><span class="span_p_infos" id="p_qtdAnimesAdicionados">Animes adicionados: </span>${json.length}</p>`;
+
+                    p_ultimoAnimeAdicionado.innerHTML = `
+                        <p><span class="span_p_infos" id="p_ultimoAnimeAdicionado">Último anime adicionado: </span>${json[json.length - 1].nome}</p>
+                    `
+                    // p_idade.innerHTML = `
+                    // <p> <span class="span_p_infos" id="p_idade">Idade: </span></p>
+                    // `;
+
+                    // <p><span class="span_p_infos" id="p_generoUsuario">Gênero: </span></p>
+                    // sessionStorage.setItem("Animes", JSON.stringify(json));
+
+                    var notaAnimeMaior = json[0].notaUser;
+                    var animePreferido = json[0].nome;
+
                     for (var i = 0; i < json.length; i++) {
+
+                        if (notaAnimeMaior < json[i].notaUser) {
+                            notaAnimeMaior = json[i].notaUser;
+                            animePreferido = json[i].nome;
+                            console.log(animePreferido);
+                        }
 
                         var dataLancamentoAnime = new Date(json[i].dtLancamento);
                         var dataLancamentoAnimeFormatada = dataLancamentoAnime.toLocaleDateString('pt-BR');
@@ -414,6 +474,10 @@
             </div>
                         `;
                     }
+
+                    p_animePreferido.innerHTML = `
+                            <p><span class="span_p_infos" id="p_animePreferido">Anime preferido: </span>${animePreferido}</p>
+                            `
                 });
             } else {
 
@@ -428,6 +492,59 @@
         }).catch(function (erro) {
             console.log(erro);
         })
+
+        return false;
+    }
+
+    function editarInfos() {
+        var campoParaEditar = select_campoEditar.value
+        var novoValor = input_valorNovo.value;
+
+        if (campoParaEditar == '#' || novoValor == '') {
+            //cardErro.style.display = "block"
+            //mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            //finalizarAguardar();
+            alert("Preencha todas as informações")
+            return false;
+        }
+        else {
+            //setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/atualizarCampo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                campoParaEditarServer: campoParaEditar,
+                novoValorServer: novoValor,
+                idUsuarioServer: sessionStorage.getItem("ID_USUARIO")
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    //cardErro.style.display = "block";
+                    
+
+                    // setTimeout(() => {
+                    //     window.location = "login.html";
+                    // }, "2000");
+
+                    //finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                //finalizarAguardar();
+            });
 
         return false;
     }
