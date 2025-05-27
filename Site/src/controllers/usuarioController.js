@@ -25,7 +25,9 @@ function autenticar(req, res) {
                             id: resultadoAutenticar[0].idUsuario,
                             email: resultadoAutenticar[0].email,
                             username: resultadoAutenticar[0].username,
-                            senha: resultadoAutenticar[0].senha
+                            senha: resultadoAutenticar[0].senha,
+                            generoUsuario: resultadoAutenticar[0].generoUsuario,
+                            idade: resultadoAutenticar[0].idade
                         });
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
@@ -113,8 +115,52 @@ function atualizarCampo(req, res) {
     }
 }
 
+function buscarInfosUsuario(req, res) {
+    var username = req.body.usernameServer
+    var email = req.body.emailServer;
+
+    if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (username == undefined) {
+        res.status(400).send("Seu username está indefinido!");
+    } else {
+
+        usuarioModel.buscarInfosUsuario(username, email)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);
+                        res.json({
+                            id: resultadoAutenticar[0].idUsuario,
+                            email: resultadoAutenticar[0].email,
+                            username: resultadoAutenticar[0].username,
+                            senha: resultadoAutenticar[0].senha,
+                            generoUsuario: resultadoAutenticar[0].generoUsuario,
+                            idade: resultadoAutenticar[0].idade
+                        });
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    atualizarCampo
+    atualizarCampo,
+    buscarInfosUsuario
 }

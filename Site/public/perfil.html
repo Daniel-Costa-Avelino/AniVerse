@@ -62,11 +62,21 @@
         <div class="div_selects_ordenar">
             <select name="select_genero" id="select_ordenarGenero">
                 <option value="#">Selecione um gênero</option>
-                <option value="terror">Terror</option>
-                <option value="comedia">Comédia</option>
-                <option value="aventura">Aventura</option>
-                <option value="fantasia">Fantasia</option>
-                <option value="romance">Romance</option>
+                <option value="Ação">Ação</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Comédia">Comédia</option>
+                <option value="Drama">Drama</option>
+                <option value="Fantasia">Fantasia</option>
+                <option value="Música">Música</option>
+                <option value="Romance">Romance</option>
+                <option value="Ficção Científica">Ficção Científica</option>
+                <option value="Seinen">Seinen</option>
+                <option value="Shoujo">Shoujo</option>
+                <option value="Shounen">Shounen</option>
+                <option value="Slice-of-life">Slice-of-life</option>
+                <option value="Esportes">Esportes</option>
+                <option value="Sobrenatural">Sobrenatural</option>
+                <option value="Suspense">Suspense</option>
             </select>
 
             <select name="select_ordem" id="select_ordemAlfabetica">
@@ -211,7 +221,24 @@
 
             <div class="div_campo">
                 <p class="p_campo">Gênero:</p>
-                <input type="text" id="input_generoAnime" placeholder="Digite o gênero do anime">
+                <select name="genero" id="select_genero" required>
+                    <option value="#">Selecione um gênero</option>
+                    <option value="Ação">Ação</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Música">Música</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Ficção Científica">Ficção Científica</option>
+                    <option value="Seinen">Seinen</option>
+                    <option value="Shoujo">Shoujo</option>
+                    <option value="Shounen">Shounen</option>
+                    <option value="Slice-of-life">Slice-of-life</option>
+                    <option value="Esportes">Esportes</option>
+                    <option value="Sobrenatural">Sobrenatural</option>
+                    <option value="Suspense">Suspense</option>
+                </select>
             </div>
             <div class="div_campo">
                 <p class="p_campo">Classificação indicativa:</p>
@@ -262,6 +289,66 @@
 <script>
 
     window.onload = exibirAnime();
+    window.onload = buscarInfosUsuario();
+
+    function buscarInfosUsuario() {
+
+        fetch("/usuarios/buscarInfosUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                usernameServer: sessionStorage.getItem("NOME_USUARIO"),
+                emailServer: sessionStorage.getItem("EMAIL_USUARIO")
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.NOME_USUARIO = json.username;
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.IDADE_USUARIO = json.idade;
+                    sessionStorage.GENERO_USUARIO = json.generoUsuario;
+
+                    p_username.innerHTML = `<p><span class="span_p_infos" id="p_username">Username: 
+        </span>${sessionStorage.getItem("NOME_USUARIO")}</p>`;
+
+                    p_generoUsuario.innerHTML = `<p><span class="span_p_infos" id="p_generoUsuario">Gênero: 
+        </span>${sessionStorage.getItem("GENERO_USUARIO")}</p>`;
+
+                    p_idade.innerHTML = `<p><span class="span_p_infos" id="p_idade">Idade: 
+        </span>${sessionStorage.getItem("IDADE_USUARIO")}</p>`;
+
+                    // setTimeout(function () {
+                    //     window.location.href = "/perfil.html";
+                    // }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
 
     function mostrarModal() {
         section_modal.style.display = "flex";
@@ -292,7 +379,7 @@
         var ondeAssistirAnime = input_ondeAssistirAnime.value;
         var dtLancamentoAnime = input_dtLancamentoAnime.value;
         var dtLancamentoAnimeUltimoEpisodio = input_dtLancamentoAnimeUltimoEpisodio.value;
-        var generoAnime = input_generoAnime.value;
+        var generoAnime = select_genero.value;
         var classificacaoIndicativaAnime = Number(input_classificacaoIndicativaAnime.value);
         var notaAnime = Number(input_notaAnime.value);
         var idUsuario = sessionStorage.getItem("ID_USUARIO");
@@ -411,10 +498,6 @@
 
                     console.log(JSON.stringify(json));
 
-
-                    p_username.innerHTML = `<p><span class="span_p_infos" id="p_username">Username: 
-        </span>${sessionStorage.getItem("NOME_USUARIO")}</p>`;
-
                     p_qtdAnimesAdicionados.innerHTML =
                         `<p><span class="span_p_infos" id="p_qtdAnimesAdicionados">Animes adicionados: </span>${json.length}</p>`;
 
@@ -462,6 +545,8 @@
                         ${json[i].notaUser}</p>
                     <p class="p_genero_anime"><span class="span_destaque">Gênero:</span> 
                         ${json[i].genero}</p>
+                    <p class="p_classificacaoIndicativa"><span class="span_destaque">Classificação indicativa:</span> 
+                        ${json[i].classificacaoIndicativa} anos</p>
                     <p class="p_onde_assistir"><span class="span_destaque">Onde assistir:</span>
                          ${json[i].onde_assistir}</p>
                     <p class="p_periodo"><span class="span_destaque">Período de exibição:</span></p>
@@ -530,7 +615,7 @@
 
                 if (resposta.ok) {
                     //cardErro.style.display = "block";
-                    
+
 
                     // setTimeout(() => {
                     //     window.location = "login.html";

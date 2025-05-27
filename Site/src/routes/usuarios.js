@@ -16,4 +16,8 @@ router.post("/atualizarCampo", function (req, res) {
     usuarioController.atualizarCampo(req, res);
 });
 
+router.post("/buscarInfosUsuario", function (req, res) {
+    usuarioController.buscarInfosUsuario(req, res);
+});
+
 module.exports = router;
