@@ -14,7 +14,7 @@
     <header class="cabecalho_dashboard">
         <div class="div_perfilUsuario">
             <img src="./assets/avatar.png" alt="Imagem de avatar">
-            <p id="p_nomeUsuario">Olá, Daniel Costa</p>
+            <p id="p_nomeUsuario"></p>
         </div>
         <div class="div_voltar">
             <img src="./assets/iconeVoltar.png" alt="Ícone de voltar">
@@ -25,15 +25,15 @@
     <section id="sessao_indicadores">
         <div id="card_ranking" class="card_indicadores">
             <p class="p_titulo_card">Ranking:</p>
-            <p id="p_ranking" class="p_paragrafo_indicador">05°</p>
+            <p id="p_ranking" class="p_paragrafo_indicador"></p>
         </div>
         <div id="card_genero_mais_assistido" class="card_indicadores">
             <p class="p_titulo_card">Gênero mais assistido:</p>
-            <p id="p_generoMaisAssistido" class="p_paragrafo_indicador">Comédia</p>
+            <p id="p_generoMaisAssistido" class="p_paragrafo_indicador"></p>
         </div>
         <div id="card_tempo_assistido" class="card_indicadores">
             <p class="p_titulo_card">Tempo assistido ao todo:</p>
-            <p id="p_tempo_assistido" class="p_paragrafo_indicador">1000 minutos</p>
+            <p id="p_tempo_assistido" class="p_paragrafo_indicador"></p>
         </div>
     </section>
 
@@ -51,7 +51,142 @@
             GRAFICO QTD HORAS ASSISTIDAS POR ANIME
         </div>
     </section>
-
 </body>
 
 </html>
+
+<script>
+
+    p_nomeUsuario.innerHTML = `
+    <p id="p_nomeUsuario">Olá, ${sessionStorage.NOME_USUARIO}</p>
+    `;
+
+    window.onload = buscarRanking(), buscarGeneroMaisAssistido(), buscarTempoAssistido();
+
+    function buscarRanking() {
+
+        fetch("/dashboard/buscarRanking", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUserServer: sessionStorage.getItem("ID_USUARIO")
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.RANKING_USUARIO = json[0].ranking;
+
+                    p_ranking.innerHTML = `
+                        <p id="p_ranking" class="p_paragrafo_indicador">${json[0].ranking}º</p>
+                    `;
+
+                });
+            } else {
+                console.log("Houve um erro ao tentar buscar o ranking!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    //finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function buscarGeneroMaisAssistido() {
+
+        fetch("/dashboard/buscarGeneroMaisAssistido", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUserServer: sessionStorage.getItem("ID_USUARIO")
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.GENERO_MAIS_ASSISTIDO = json[0].genero;
+
+                    p_generoMaisAssistido.innerHTML = `
+                        <p id="p_generoMaisAssistido" class="p_paragrafo_indicador">${json[0].genero}</p>
+                    `;
+
+                });
+            } else {
+                console.log("Houve um erro ao tentar buscar o ranking!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    //finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function buscarTempoAssistido() {
+
+        fetch("/dashboard/buscarTempoAssistido", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUserServer: sessionStorage.getItem("ID_USUARIO")
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.TEMPO_ASSISTIDO = json[0].qtdTempoAssistido;
+
+                    p_tempo_assistido.innerHTML = `
+                        <p id="p_tempo_assistido" class="p_paragrafo_indicador">${json[0].qtdTempoAssistido} minutos</p>
+                    `;
+
+                });
+            } else {
+                console.log("Houve um erro ao tentar buscar o ranking!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    //finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>
