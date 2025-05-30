@@ -20,6 +20,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var perfilRouter = require("./src/routes/perfil");
 var exibirAnimeRouter = require("./src/routes/exibirAnime");
 var dashboardRouter = require("./src/routes/dashboard");
+var recomendacoesRouter = require("./src/routes/recomendacoes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/perfil", perfilRouter);
 app.use("/exibirAnime", exibirAnimeRouter);
 app.use("/dashboard", dashboardRouter);
+app.use("/recomendacoes", recomendacoesRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
