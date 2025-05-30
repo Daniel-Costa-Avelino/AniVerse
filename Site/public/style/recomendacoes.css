@@ -103,21 +103,24 @@
     display: flex;
     justify-content: space-around;
     background-color: #26251C;
-    width: 90%;
+    width: 95%;
     border-radius: 10px;
     margin-top: 20px;
     box-shadow: 15px 15px 20px -17px #26251C;
+    height: auto;
+    padding: 10px;
 }
 
 .div_img_anime {
     width: 50%;
     display: flex;
     align-items: center;
+    height: auto;
 }
 
 .div_img_anime img {
     width: 100%;
-    height: 95%;
+    height: 450px;
     border-radius: 8px;
 }
 
@@ -135,7 +138,7 @@
     font-size: 30px;
     text-align: center;
     border-bottom: 1px solid white;
-    width: 40%;
+    width: 60%;
     align-self: center;
 }
 
