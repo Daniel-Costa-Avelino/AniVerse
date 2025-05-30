@@ -1,36 +1,20 @@
-// sessão
-function validarSessao() {
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
-
-    var b_usuario = document.getElementById("b_usuario");
-
-    if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
-    } else {
-        window.location = "../login.html";
-    }
+function fecharModal() {
+    var modal = document.getElementById("section_modal_mensagem")
+    modal.style.display = "none";
 }
 
-function limparSessao() {
-    sessionStorage.clear();
-    window.location = "../login.html";
+function modalErro(mensagem) {
+    var modal = document.getElementById("section_modal_mensagem")
+    var div_erro = document.getElementById("div_mensagem")
+    modal.style.display = "flex";
+    div_erro.innerHTML = `<p>${mensagem}</p>`;
+    div_erro.innerHTML += `<img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDILi1wNlm2b3koKzwDhj9JpYTL4-lIiTMtA&s" width = "50%" height = "80%">`;
 }
 
-// carregamento (loading)
-function aguardar() {
-    var divAguardar = document.getElementById("div_aguardar");
-    //divAguardar.style.display = "flex";
+function modalFuncionou(mensagem) {
+    var modal = document.getElementById("section_modal_mensagem")
+    var div_certo = document.getElementById("div_mensagem")
+    modal.style.display = "flex";
+    div_certo.innerHTML = `<p>${mensagem}</p>`;
+    div_certo.innerHTML += `<img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPEPZicmQo7Kd5nrQ8sUuA56HTzmLosv_ysg&s" width = "50%" height = "80%">`;
 }
-
-function finalizarAguardar(texto) {
-    var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "none";
-
-    var divErrosLogin = document.getElementById("div_erros_login");
-    if (texto) {
-        divErrosLogin.style.display = "flex";
-        divErrosLogin.innerHTML = texto;
-    }
-}
-

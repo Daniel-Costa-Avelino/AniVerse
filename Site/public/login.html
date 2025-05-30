@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="./style/global.css">
     <link rel="stylesheet" href="./style/login.css">
 
-    <script src="./js/sessao.js"></script>
-
 </head>
 
 <body>
@@ -63,38 +61,27 @@
         </div>
     </section>
 
-    <div id="div_erros_login"></div>
-    <div id="div_aguardar" class="loading-div">
-        <img src="./assets/circle-loading.gif" id="loading-gif">
-    </div>
-    <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
+    <section id="section_modal_mensagem">
+        <div class="div_mensagem" id="div_mensagem">
         </div>
-    </div>
-
+    </section>
+    <script src="./js/sessao.js"></script>
 </body>
 
 </html>
-
 <script>
 
-
     function entrar() {
-        aguardar();
 
         var usernameVar = input_username.value;
         var emailVar = input_email.value;
         var senhaVar = input_senha.value;
 
         if (emailVar == "" || senhaVar == "" || usernameVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            var mensagem = "Preencha todos os dados para efetuar o Login!"
+            modalErro(mensagem);
+            setInterval(fecharModal, 3000)
             return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -115,6 +102,9 @@
 
             if (resposta.ok) {
                 console.log(resposta);
+                var mensagem = "Login realizado com sucesso! Você irá para página de perfil.";
+                modalFuncionou(mensagem);
+                setInterval(fecharModal, 2500)
 
                 resposta.json().then(json => {
                     console.log(json);
@@ -124,20 +114,19 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.IDADE_USUARIO = json.idade;
                     sessionStorage.GENERO_USUARIO = json.generoUsuario;
-
-                    setTimeout(function () {
-                        window.location.href = "/perfil.html";
-                    }, 1000); // apenas para exibir o loading
-
+                    setInterval(function () {
+                        window.location = "perfil.html";
+                    }, 3500);
                 });
-
             } else {
-
+                var mensagem = "Houve um erro ao logar, verifique suas credenciais!";
                 console.log("Houve um erro ao tentar realizar o login!");
+
+                modalErro(mensagem);
+                setInterval(fecharModal, 2500)
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
@@ -146,10 +135,6 @@
         })
 
         return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
     }
 
 </script>
