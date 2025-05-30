@@ -16,4 +16,16 @@ router.post("/buscarTempoAssistido", function (req, res) {
     dashboardController.buscarTempoAssistido(req, res);
 })
 
+router.post("/buscarQtdAnimesPorAnoVigente", function (req, res) {
+    dashboardController.buscarQtdAnimesPorAnoVigente(req, res);
+})
+
+router.post("/buscarQtdHorasPorAnime", function (req, res) {
+    dashboardController.buscarQtdHorasPorAnime(req, res);
+})
+
+router.post("/buscarQtdAnimesPorGenero", function (req, res) {
+    dashboardController.buscarQtdAnimesPorGenero(req, res);
+})
+
 module.exports = router;

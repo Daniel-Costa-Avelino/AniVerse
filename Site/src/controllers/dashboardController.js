@@ -90,8 +90,102 @@ function buscarTempoAssistido(req, res) {
     }
 }
 
+function buscarQtdAnimesPorGenero(req, res) {
+    var idUsuario = req.body.idUserServer
+
+    if (idUsuario == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+
+        dashboardModel.buscarQtdAnimesPorGenero(idUsuario)
+            .then(
+                function (resultadoBusca) {
+                    console.log(`\nResultados encontrados: ${resultadoBusca.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoBusca)}`); // transforma JSON em String
+
+                    if (resultadoBusca.length >= 1) {
+                        res.json(resultadoBusca);
+
+                    } else {
+                        res.status(403).send("Não tem nenhum anime adicionado");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao buscar os animes! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function buscarQtdAnimesPorAnoVigente(req, res) {
+    var idUsuario = req.body.idUserServer
+
+    if (idUsuario == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+
+        dashboardModel.buscarQtdAnimesPorAnoVigente(idUsuario)
+            .then(
+                function (resultadoBusca) {
+                    console.log(`\nResultados encontrados: ${resultadoBusca.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoBusca)}`); // transforma JSON em String
+
+                    if (resultadoBusca.length >= 1) {
+                        res.json(resultadoBusca);
+
+                    } else {
+                        res.status(403).send("Não tem nenhum anime adicionado");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao buscar os animes! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
+function buscarQtdHorasPorAnime(req, res) {
+    var idUsuario = req.body.idUserServer
+
+    if (idUsuario == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+
+        dashboardModel.buscarQtdHorasPorAnime(idUsuario)
+            .then(
+                function (resultadoBusca) {
+                    console.log(`\nResultados encontrados: ${resultadoBusca.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoBusca)}`); // transforma JSON em String
+
+                    if (resultadoBusca.length >= 1) {
+                        res.json(resultadoBusca);
+
+                    } else {
+                        res.status(403).send("Não tem nenhum anime adicionado");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao buscar os animes! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     buscarRanking,
     buscarGeneroMaisAssistido,
-    buscarTempoAssistido
+    buscarTempoAssistido,
+    buscarQtdAnimesPorGenero,
+    buscarQtdAnimesPorAnoVigente,
+    buscarQtdHorasPorAnime
 }

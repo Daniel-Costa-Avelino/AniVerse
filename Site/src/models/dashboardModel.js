@@ -41,8 +41,46 @@ function buscarTempoAssistido(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarQtdAnimesPorAnoVigente(idUsuario) {
+    var instrucaoSql = `
+    SELECT YEAR(la.dtLancamento) AS anoLancamento, COUNT(la.idAnime) AS qtdAnimesAno FROM listaAnimes AS la
+    JOIN usuario AS u ON u.idUsuario = la.fkUsuario
+    WHERE u.idUsuario = ${idUsuario}
+    GROUP BY YEAR(la.dtLancamento);
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarQtdHorasPorAnime(idUsuario) {
+    var instrucaoSql = `
+    SELECT la.nome, ROUND((la.episodios * 23) / 60) AS qtdHorasPorAnime FROM listaAnimes AS la
+    JOIN usuario AS u ON la.fkUsuario = u.idUsuario
+    WHERE idUsuario = ${idUsuario}
+    GROUP BY la.nome, la.episodios
+    ORDER BY ROUND(qtdHorasPorAnime) DESC; 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarQtdAnimesPorGenero(idUsuario) {
+    var instrucaoSql = `
+    SELECT la.genero, COUNT(la.genero) AS qtdAnimesGenero FROM listaAnimes AS la
+    JOIN usuario AS u ON la.fkUsuario = u.idUsuario
+    WHERE u.idUsuario = ${idUsuario}
+    GROUP BY u.username, la.genero
+    ORDER BY qtdAnimesGenero DESC;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarRanking,
     buscarGeneroMaisAssistido,
-    buscarTempoAssistido
+    buscarTempoAssistido,
+    buscarQtdAnimesPorAnoVigente,
+    buscarQtdHorasPorAnime,
+    buscarQtdAnimesPorGenero
 };
