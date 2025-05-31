@@ -281,7 +281,12 @@
         </div>
     </section>
 
+    <section id="section_modal_mensagem">
+        <div class="div_mensagem" id="div_mensagem">
+        </div>
+    </section>
 
+    <script src="./js/sessao.js"></script>
 </body>
 
 </html>
@@ -320,25 +325,32 @@
                     p_username.innerHTML = `<p><span class="span_p_infos" id="p_username">Username: 
         </span>${sessionStorage.getItem("NOME_USUARIO")}</p>`;
 
-                    p_generoUsuario.innerHTML = `<p><span class="span_p_infos" id="p_generoUsuario">Gênero: 
+
+                    if (sessionStorage.getItem("GENERO_USUARIO") == 'null') {
+                        p_generoUsuario.innerHTML = `<p><span class="span_p_infos" id="p_generoUsuario">Gênero: 
+        </span>Não preenchida</p>`;
+                    } else {
+                        p_generoUsuario.innerHTML = `<p><span class="span_p_infos" id="p_generoUsuario">Gênero: 
         </span>${sessionStorage.getItem("GENERO_USUARIO")}</p>`;
+                    }
 
-                    p_idade.innerHTML = `<p><span class="span_p_infos" id="p_idade">Idade: 
+                    if (sessionStorage.getItem("IDADE_USUARIO") == 'null') {
+                        p_idade.innerHTML = `<p><span class="span_p_infos" id="p_idade">Idade: 
+        </span>Não preenchida</p>`;
+                    } else {
+                        p_idade.innerHTML = `<p><span class="span_p_infos" id="p_idade">Idade: 
         </span>${sessionStorage.getItem("IDADE_USUARIO")}</p>`;
-
-                    // setTimeout(function () {
-                    //     window.location.href = "/perfil.html";
-                    // }, 1000); // apenas para exibir o loading
-
+                    }
                 });
-
             } else {
 
-                console.log("Houve um erro ao tentar realizar o login!");
+                var mensagem = "Houve um erro ao tentar buscar as informações do usuário!"
+                modalErro(mensagem);
+                setInterval(fecharModalMensagem, 3000)
+                console.log("Houve um erro ao tentar buscar as informações do usuário");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
@@ -366,10 +378,6 @@
     }
 
     function adicionarAnime() {
-        // aguardar();
-
-        //Recupere o valor da nova input pelo nome do id
-        // Agora vá para o método fetch logo abaixo
 
         var nomeAnime = input_nomeAnime.value;
         var descricao = input_descricao.value;
@@ -399,25 +407,18 @@
             notaAnime == '' ||
             idUsuario == ''
         ) {
-            cardErro.style.display = "block";
-            mensagem_erro.innerHTML =
-                "(Mensagem de erro para todos os campos em branco)";
-
-            //finalizarAguardar();
+            var mensagem = "Preencha todos os dados para cadastrar o anime!"
+            modalErro(mensagem);
+            setInterval(fecharModalMensagem, 3000)
             return false;
-        } else {
-            //setInterval(sumirMensagem, 5000);
         }
 
-        // Enviando o valor da nova input
         fetch("/perfil/adicionarAnime", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
                 nomeAnimeServer: nomeAnime,
                 descricaoServer: descricao,
                 imagemServer: imagem,
@@ -436,48 +437,26 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-                    //cardErro.style.display = "block";
-
-                    // mensagem_erro.innerHTML =
-                    //     "Anime adicionado com sucesso!";
-
-                    // setTimeout(() => {
-                    //     window.location = "login.html";
-                    // }, "2000");
-
-                    //finalizarAguardar();
+                    var mensagem = "O anime foi cadastrado com sucesso!"
+                    modalFuncionou(mensagem);
+                    setInterval(fecharModalMensagem, 4000)
                 } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
+                    var mensagem = "Houve um erro ao tentar realizar o cadastro do anime!"
+                    modalErro(mensagem);
+                    setInterval(fecharModalMensagem, 3000)
+                    throw "Houve um erro ao tentar realizar o cadastro do anime!";
                 }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-                //finalizarAguardar();
             });
 
         return false;
     }
 
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none";
-    // }
-
-
     function exibirAnime() {
-        //aguardar();
 
         var idUsuario = sessionStorage.getItem("ID_USUARIO");
-
-        if (idUsuario == undefined) {
-            //cardErro.style.display = "block"
-            //mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            //finalizarAguardar();
-            alert("usuario undefined")
-            return false;
-        }
-        else {
-            //setInterval(sumirMensagem, 5000)
-        }
 
         fetch("/exibirAnime/exibirAnimesAssistidos", {
             method: "POST",
@@ -500,16 +479,9 @@
 
                     p_qtdAnimesAdicionados.innerHTML =
                         `<p><span class="span_p_infos" id="p_qtdAnimesAdicionados">Animes adicionados: </span>${json.length}</p>`;
-
                     p_ultimoAnimeAdicionado.innerHTML = `
                         <p><span class="span_p_infos" id="p_ultimoAnimeAdicionado">Último anime adicionado: </span>${json[json.length - 1].nome}</p>
                     `
-                    // p_idade.innerHTML = `
-                    // <p> <span class="span_p_infos" id="p_idade">Idade: </span></p>
-                    // `;
-
-                    // <p><span class="span_p_infos" id="p_generoUsuario">Gênero: </span></p>
-                    // sessionStorage.setItem("Animes", JSON.stringify(json));
 
                     var notaAnimeMaior = json[0].notaUser;
                     var animePreferido = json[0].nome;
@@ -566,6 +538,16 @@
                 });
             } else {
 
+                p_qtdAnimesAdicionados.innerHTML =
+                    `<p><span class="span_p_infos" id="p_qtdAnimesAdicionados">Animes adicionados: </span>Nenhum anime adicionado</p>`;
+                p_ultimoAnimeAdicionado.innerHTML = `
+                        <p><span class="span_p_infos" id="p_ultimoAnimeAdicionado">Último anime adicionado: </span>Nenhum anime adicionado</p>
+                    `
+
+                p_animePreferido.innerHTML = `
+                            <p><span class="span_p_infos" id="p_animePreferido">Anime preferido: </span>Nemhum anime adicionado</p>
+                            `
+
                 console.log("Houve um erro ao tentar exibir os animes!");
 
                 resposta.text().then(texto => {
@@ -586,14 +568,11 @@
         var novoValor = input_valorNovo.value;
 
         if (campoParaEditar == '#' || novoValor == '') {
-            //cardErro.style.display = "block"
-            //mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            //finalizarAguardar();
-            alert("Preencha todas as informações")
+
+            var mensagem = "Preencha todas as informações!"
+            modalErro(mensagem);
+            setInterval(fecharModalMensagem, 3000)
             return false;
-        }
-        else {
-            //setInterval(sumirMensagem, 5000)
         }
 
         // Enviando o valor da nova input
@@ -614,21 +593,18 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-                    //cardErro.style.display = "block";
-
-
-                    // setTimeout(() => {
-                    //     window.location = "login.html";
-                    // }, "2000");
-
-                    //finalizarAguardar();
+                    var mensagem = "Informações editadas com sucesso"
+                    modalFuncionou(mensagem);
+                    setInterval(fecharModalMensagem, 3000)
                 } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
+                    var mensagem = "Houve um erro ao tentar alterar as informações!"
+                    modalErro(mensagem);
+                    setInterval(fecharModalMensagem, 3000)
+                    throw "Houve um erro ao tentar alterar as informações";
                 }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-                //finalizarAguardar();
             });
 
         return false;

@@ -91,7 +91,7 @@
         ) {
             var mensagem = "Preencha todos os dados para efetuar o cadastro!"
             modalErro(mensagem);
-            setInterval(fecharModal, 3000)
+            setInterval(fecharModalMensagem, 3000)
             return false;
         }
 
@@ -115,7 +115,7 @@
                 if (resposta.ok) {
                     var mensagem = "Cadastro realizado com sucesso, você irá para página de login...";
                     modalFuncionou(mensagem);
-                    setInterval(fecharModal, 2500)
+                    setInterval(fecharModalMensagem, 2500)
 
                     setTimeout(() => {
                         window.location = "login.html";
@@ -123,8 +123,8 @@
 
                 } else {
                     var mensagem = "Houve um erro ao tentar realizar o cadastro!";
-                    modalFuncionou(mensagem);
-                    setInterval(fecharModal, 2500)
+                    modalErro(mensagem);
+                    setInterval(fecharModalMensagem, 2500)
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })

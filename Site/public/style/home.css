@@ -190,7 +190,7 @@
     border-radius: 8px;
     padding: 30px 10px;
     justify-content: space-between;
-    height: 370px;
+    height: auto;
     gap: 15px;
     box-shadow: 15px 15px 20px -17px #26251C;
 }

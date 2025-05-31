@@ -80,7 +80,7 @@
         if (emailVar == "" || senhaVar == "" || usernameVar == "") {
             var mensagem = "Preencha todos os dados para efetuar o Login!"
             modalErro(mensagem);
-            setInterval(fecharModal, 3000)
+            setInterval(fecharModalMensagem, 3000)
             return false;
         }
 
@@ -104,7 +104,7 @@
                 console.log(resposta);
                 var mensagem = "Login realizado com sucesso! Você irá para página de perfil.";
                 modalFuncionou(mensagem);
-                setInterval(fecharModal, 2500)
+                setInterval(fecharModalMensagem, 2500)
 
                 resposta.json().then(json => {
                     console.log(json);
@@ -123,7 +123,7 @@
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 modalErro(mensagem);
-                setInterval(fecharModal, 2500)
+                setInterval(fecharModalMensagem, 2500)
 
                 resposta.text().then(texto => {
                     console.error(texto);

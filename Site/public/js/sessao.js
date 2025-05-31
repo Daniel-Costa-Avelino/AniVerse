@@ -1,4 +1,4 @@
-function fecharModal() {
+function fecharModalMensagem() {
     var modal = document.getElementById("section_modal_mensagem")
     modal.style.display = "none";
 }

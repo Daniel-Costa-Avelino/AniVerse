@@ -63,6 +63,7 @@
     flex-direction: column;
     gap: 20px;
     width: 60%;
+    text-align: justify;
 }
 
 .div_textoSobreMim p {

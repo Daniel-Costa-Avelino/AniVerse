@@ -57,14 +57,25 @@
 
 .sessao_historia_meio {
     display: flex;
-    flex-direction: column;
     background-color: #26251C;
     justify-content: space-around;
-    height: 550px;
+    height: auto;
     padding: 20px;
     align-items: center;
     text-align: justify;
     gap: 15px;
+}
+
+.div_paragrafos_historia_meio {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.div_imagem_astroBoy {
+    width: 40%;
+    height: 100%;
 }
 
 .paragrafo_sessao_meio {
@@ -73,9 +84,10 @@
     font-size: 20px;
 }
 
-.sessao_historia_meio img {
-    width: 200px;
-    height: 250px;
+.div_imagem_astroBoy img {
+    width: 100%;
+    height: 420px;
+    border-radius: 10px;
 }
 
 .sessao_historia_fim {
@@ -113,7 +125,7 @@
     border-radius: 8px;
     padding: 30px 10px;
     justify-content: space-between;
-    height: 370px;
+    height: auto;
     gap: 15px;
     box-shadow: 15px 15px 20px -17px #26251C;
 }
