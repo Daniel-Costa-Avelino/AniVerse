@@ -33,7 +33,10 @@ function buscarQtdAnimesPorGenero() {
             });
 
         } else {
-            console.log("Houve um erro ao tentar buscar o ranking!");
+            
+            var div_grafico_qtdAnimesPorGenero = document.getElementById("div_grafico_qtdAnimesPorGenero");
+            div_grafico_qtdAnimesPorGenero.innerHTML = "<p style = 'font-size:25px;' >Nenhum anime adicionado</p>";
+            console.log("Houve um erro ao tentar buscar a quantidade de animes por gênero!");
             resposta.text().then(texto => {
                 console.error(texto);
                 //finalizarAguardar(texto);

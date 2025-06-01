@@ -8,4 +8,8 @@ router.post("/buscarRecomendacoes", function (req, res) {
     buscarRecomendacoesController.buscarRecomendacoes(req, res);
 })
 
+router.post("/buscarRecomendacoesGenero", function (req, res) {
+    buscarRecomendacoesController.buscarRecomendacoesGenero(req, res);
+})
+
 module.exports = router;

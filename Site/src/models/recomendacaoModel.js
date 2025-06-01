@@ -18,6 +18,25 @@ function buscarRecomendacoes(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarRecomendacoesGenero(idUsuario, genero) {
+    var instrucaoSql = `
+        SELECT  nome,
+    descricao,
+    imagemAnime,
+    temporadas,
+    episodios,
+    onde_assistir,
+    dtLancamento,
+    dtUltimoEpLancado,
+    genero,
+    classificacaoIndicativa
+    FROM recomendacoes WHERE genero = '${genero}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    buscarRecomendacoes
+    buscarRecomendacoes,
+    buscarRecomendacoesGenero
 };

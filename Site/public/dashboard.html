@@ -15,7 +15,7 @@
 
     <header class="cabecalho_dashboard">
         <div class="div_perfilUsuario">
-            <img src="./assets/avatar.png" alt="Imagem de avatar">
+            <img src="./assets/avatar.png" alt="Imagem de avatar" class="imgAvatar">
             <p id="p_nomeUsuario"></p>
         </div>
         <div class="div_voltar">
@@ -57,11 +57,14 @@
 
 </html>
 
+<script src="./js/sessao.js"></script>
 <script src="./js/graficoQtdAnimesAnoVigente.js"></script>
 <script src="./js/graficoQtdAnimesPorGenero.js"></script>
 <script src="./js/graficoQtdHorasPorAnime.js"></script>
-
 <script>
+
+    window.onload = validarSessao();
+    window.onload = validarSessao_avatarDash();
 
     p_nomeUsuario.innerHTML = `
     <p id="p_nomeUsuario">Olá, ${sessionStorage.NOME_USUARIO}</p>
@@ -99,7 +102,6 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    //finalizarAguardar(texto);
                 });
             }
 
@@ -137,11 +139,12 @@
 
                 });
             } else {
-                console.log("Houve um erro ao tentar buscar o ranking!");
-
+                console.log("Houve um erro ao tentar buscar o genero mais assistido!");
+                p_generoMaisAssistido.innerHTML = `
+                        <p id="p_generoMaisAssistido" class="p_paragrafo_indicador">Nenhum anime adicionado</p>
+                    `;
                 resposta.text().then(texto => {
                     console.error(texto);
-                    //finalizarAguardar(texto);
                 });
             }
 
@@ -173,17 +176,21 @@
                     console.log(JSON.stringify(json));
                     sessionStorage.TEMPO_ASSISTIDO = json[0].qtdTempoAssistido;
 
-                    p_tempo_assistido.innerHTML = `
+                    if (json[0].qtdTempoAssistido != null) {
+                        p_tempo_assistido.innerHTML = `
                         <p id="p_tempo_assistido" class="p_paragrafo_indicador">${json[0].qtdTempoAssistido} minutos</p>
                     `;
-
+                    } else {
+                        p_tempo_assistido.innerHTML = `
+                        <p id="p_tempo_assistido" class="p_paragrafo_indicador">Nenhum anime adicionado</p>
+                    `;
+                    }
                 });
             } else {
-                console.log("Houve um erro ao tentar buscar o ranking!");
+                console.log("Houve um erro ao tentar buscar os minutos assistidos!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    //finalizarAguardar(texto);
                 });
             }
 

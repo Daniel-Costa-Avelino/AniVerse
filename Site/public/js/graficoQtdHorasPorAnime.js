@@ -33,10 +33,14 @@ function buscarQtdHorasPorAnime() {
             });
 
         } else {
-            console.log("Houve um erro ao tentar buscar o ranking!");
+            console.log("Houve um erro ao tentar busca a quantidade de horas assistidas por gênero!");
+
+            var div_grafico_horasAssistidasPorAnime = document.getElementById("div_grafico_horasAssistidasPorAnime");
+            div_grafico_horasAssistidasPorAnime.innerHTML = "<p style = 'font-size:25px;' >Nenhum anime adicionado</p>";
+
+
             resposta.text().then(texto => {
                 console.error(texto);
-                //finalizarAguardar(texto);
             });
         }
     }).catch(function (erro) {
@@ -60,7 +64,7 @@ function plotarHorasAssistidasPorAnime() {
             }]
         },
         options: {
-            responsive: true, // Define como responsivo
+            responsive: true,
             maintainAspectRatio: false,
             scales: {
                 y: {

@@ -23,6 +23,9 @@
             <a href="desenvolvedor.html" class="link">Desenvolvedor</a>
         </div>
         <div class="div_login">
+            <a href="./perfil.html" class="a_imgAvatarUsuario" hidden>
+                <img src="./assets/avatar.png" alt="avatar usuario" width="100px" height="100px" class="imgAvatar">
+            </a>
             <button class="btn_login" onclick="window.location.href = 'login.html'">Login</button>
         </div>
     </header>
@@ -44,7 +47,7 @@
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeUser.png" alt="Ícone de Username">
-                        <input type="text" placeholder="Username" id="input_username">
+                        <input type="text" placeholder="Nome" id="input_username">
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeSenha.png" alt="Ícone de senha">
@@ -56,7 +59,7 @@
                     </div>
                 </div>
                 <div class="div_login_entrar">
-                    <button class="btn_entrar" onclick="cadastrar()">Cadastrar</button>
+                    <button class="btn_entrar" onclick="validarCadastro()">Cadastrar</button>
                 </div>
             </div>
         </div>
@@ -71,13 +74,12 @@
 </body>
 
 </html>
-
-
 <script>
 
-    function cadastrar() {
-
-
+    window.onload = validarSessao_avatar()
+    window.onload = validarSessao_avatar_v2();
+    
+    function validarCadastro() {
         var emailVar = input_email.value
         var usernameVar = input_username.value
         var senhaVar = input_senha.value
@@ -93,8 +95,20 @@
             modalErro(mensagem);
             setInterval(fecharModalMensagem, 3000)
             return false;
+        } else if (senhaVar != confirmacaoSenhaVar) {
+            alert("As senhas estão diferentes!")
+        } else if (
+            !(emailVar.includes('@')) ||
+            !(emailVar.includes('.com')) ||
+            !(emailVar.includes('gmail'))
+        ) {
+            alert("O gmail deve conter: @, .com e gmail")
+        } else {
+            cadastrar(emailVar, usernameVar, senhaVar)
         }
+    }
 
+    function cadastrar(emailVar, usernameVar, senhaVar) {
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
             method: "POST",

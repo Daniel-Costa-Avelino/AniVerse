@@ -24,6 +24,9 @@
             <a href="desenvolvedor.html" class="link">Desenvolvedor</a>
         </div>
         <div class="div_login">
+            <a href="./perfil.html" class="a_imgAvatarUsuario" hidden>
+                <img src="./assets/avatar.png" alt="avatar usuario" width="100px" height="100px" class="imgAvatar">
+            </a>
             <button class="btn_login" onclick="window.location.href = 'login.html'">Login</button>
         </div>
     </header>
@@ -67,7 +70,7 @@
         </select>
 
         <div class="div_filtrar">
-            <button class="btn_filtrar">
+            <button class="btn_filtrar" onclick="buscarRecomendacoesGenero()">
                 <img src="./assets/iconeFiltro.png" alt="Icone de filtro">
                 Filtrar
             </button>
@@ -130,28 +133,22 @@
 
     <!-- Fim rodapé -->
 
-
+    <section id="section_modal_mensagem">
+        <div class="div_mensagem" id="div_mensagem">
+        </div>
+    </section>
+    <script src="./js/sessao.js"></script>
 </body>
 
 </html>
-
 <script>
 
+    window.onload = validarSessao();
+    window.onload = validarSessao_avatar();
+
     function buscarRecomendacoes() {
-        //aguardar();
 
         var idUsuario = sessionStorage.getItem("ID_USUARIO");
-
-        if (idUsuario == undefined) {
-            //cardErro.style.display = "block"
-            //mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            //finalizarAguardar();
-            alert("usuario undefined")
-            return false;
-        }
-        else {
-            //setInterval(sumirMensagem, 5000)
-        }
 
         fetch("/recomendacoes/buscarRecomendacoes", {
             method: "POST",
@@ -214,7 +211,6 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    //finalizarAguardar(texto);
                 });
             }
 
@@ -227,4 +223,88 @@
 
     window.onload = buscarRecomendacoes();
 
+    function buscarRecomendacoesGenero() {
+
+        var idUsuario = sessionStorage.getItem("ID_USUARIO");
+        var generoEscolhido = select_generos.value;
+
+        if (generoEscolhido == "#") {
+            var mensagem = "Escolha um gênero para filtrar!"
+            modalErro(mensagem);
+            setInterval(fecharModalMensagem, 4000)
+        } else {
+            fetch("/recomendacoes/buscarRecomendacoesGenero", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: idUsuario,
+                    generoEscolhidoServer: generoEscolhido
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+
+                        sessao_recomendacoes.innerHTML = '';
+
+                        for (var i = 0; i < json.length; i++) {
+
+                            var dataLancamentoAnime = new Date(json[i].dtLancamento);
+                            var dataLancamentoAnimeFormatada = dataLancamentoAnime.toLocaleDateString('pt-BR');
+
+                            var dataUltimoEpLancado = new Date(json[i].dtUltimoEpLancado);
+                            var dataUltimoEpLancadoFormatada = dataUltimoEpLancado.toLocaleDateString('pt-BR');
+
+                            sessao_recomendacoes.innerHTML += `
+              <div class="card_recomendacao">
+                <div class="div_img_anime">
+                    <img src=${json[i].imagemAnime} alt="Imagem do anime">
+                </div>
+                <div class="div_infos_anime">
+                    <h1 class="titulo_anime">${json[i].nome}</h1>
+                    <p class="p_descricao"><span class="span_destaque">Descrição: </span>
+                        ${json[i].descricao}</p>
+                    <p class="p_temporadas"><span class="span_destaque">Temporadas:</span> 
+                        ${json[i].temporadas}</p>
+                    <p class="p_episodios"><span class="span_destaque">Episódios:</span> 
+                        ${json[i].episodios}</p>
+                    <p class="p_genero_anime"><span class="span_destaque">Gênero:</span> 
+                        ${json[i].genero}</p>
+                    <p class="p_classificacaoIndicativa"><span class="span_destaque">Classificação indicativa:</span> 
+                        ${json[i].classificacaoIndicativa} anos</p>
+                    <p class="p_onde_assistir"><span class="span_destaque">Onde assistir:</span>
+                         ${json[i].onde_assistir}</p>
+                    <p class="p_periodo"><span class="span_destaque">Período de exibição:</span></p>
+                    <p class="p_data_lancamento"><span class="span_destaque">Data de lançamento:</span>
+                        ${dataLancamentoAnimeFormatada}
+                    </p>
+                    <p class="p_data_ultimo_episodio"><span class="span_destaque">Último episódio lançado:</span> 
+                        ${dataUltimoEpLancadoFormatada}</p>
+                </div>
+            </div>
+                        `;
+                        }
+                    });
+                } else {
+
+                    console.log("Houve um erro ao tentar exibir os animes!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+            return false;
+        }
+    }
 </script>

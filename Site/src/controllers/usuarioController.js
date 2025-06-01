@@ -138,6 +138,7 @@ function buscarInfosUsuario(req, res) {
                             email: resultadoAutenticar[0].email,
                             username: resultadoAutenticar[0].username,
                             senha: resultadoAutenticar[0].senha,
+                            avatar: resultadoAutenticar[0].avatarUsuario,
                             generoUsuario: resultadoAutenticar[0].generoUsuario,
                             idade: resultadoAutenticar[0].idade
                         });

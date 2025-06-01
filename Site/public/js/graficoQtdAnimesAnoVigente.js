@@ -33,10 +33,13 @@ function buscarQtdAnimesPorAnoVigente() {
             });
 
         } else {
-            console.log("Houve um erro ao tentar buscar o ranking!");
+
+            var div_grafico_qtdAnimes_assistidosAnoVigente = document.getElementById("div_grafico_qtdAnimes_assistidosAnoVigente");
+            div_grafico_qtdAnimes_assistidosAnoVigente.innerHTML = "<p style = 'font-size:25px;' >Nenhum anime adicionado</p>";
+
+            console.log("Houve um erro ao tentar buscar a quantidade de animes por ano vigente!");
             resposta.text().then(texto => {
                 console.error(texto);
-                //finalizarAguardar(texto);
             });
         }
     }).catch(function (erro) {

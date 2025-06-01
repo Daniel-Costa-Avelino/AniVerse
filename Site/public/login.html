@@ -24,6 +24,9 @@
             <a href="desenvolvedor.html" class="link">Desenvolvedor</a>
         </div>
         <div class="div_login">
+            <a href="./perfil.html" class="a_imgAvatarUsuario" hidden>
+                <img src="./assets/avatar.png" alt="avatar usuario" width="100px" height="100px" class="imgAvatar">
+            </a>
             <button class="btn_login" onclick="window.location.href = 'login.html'">Login</button>
         </div>
     </header>
@@ -46,7 +49,7 @@
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeUser.png" alt="Ícone de Username">
-                        <input type="text" placeholder="Username" id="input_username">
+                        <input type="text" placeholder="Nome" id="input_username">
                     </div>
                     <div class="div_campo">
                         <img src="./assets/iconeSenha.png" alt="Ícone de senha">
@@ -70,6 +73,8 @@
 
 </html>
 <script>
+    window.onload = validarSessao_avatar()
+    window.onload = validarSessao_avatar_v2();
 
     function entrar() {
 

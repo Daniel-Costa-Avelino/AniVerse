@@ -23,6 +23,9 @@
             <a href="desenvolvedor.html" class="link">Desenvolvedor</a>
         </div>
         <div class="div_login">
+            <a href="./perfil.html" class="a_imgAvatarUsuario" hidden>
+                <img src="./assets/avatar.png" alt="avatar usuario" width="100px" height="100px" class="imgAvatar">
+            </a>
             <button class="btn_login" onclick="window.location.href = 'login.html'">Login</button>
         </div>
     </header>
@@ -89,16 +92,18 @@
             <h1>Quer ter acesso a:</h1>
             <div class="div_paragrafos_chamadaAcao">
                 <img src="./assets/iconeSetaChamada.png" alt="Icone de seta">
-                <p>Página de perfil: Com suas informações podendo editá-las e adcionar animes assistidos.
+                <p>Página de perfil: Com suas informações podendo editá-las e adicionar animes assistidos.
                 </p>
             </div>
             <div class="div_paragrafos_chamadaAcao">
                 <img src="./assets/iconeSetaChamada.png" alt="Icone de seta">
-                <p>Página de dashboard: Ter uma dashboard dinâmica, mostrando seu tempo assistindo animes, entre outros</p>
+                <p>Página de dashboard: Ter uma dashboard dinâmica, mostrando seu tempo assistindo animes, entre outros
+                </p>
             </div>
             <div class="div_paragrafos_chamadaAcao">
                 <img src="./assets/iconeSetaChamada.png" alt="Icone de seta">
-                <p>Página de recomendações: página para você receber recomendações de animes para assistir, com mais de 60 opções!</p>
+                <p>Página de recomendações: página para você receber recomendações de animes para assistir, com mais de
+                    60 opções!</p>
             </div>
 
             <p class="paragrafo_bastaVoce">Basta você</p>
@@ -136,9 +141,12 @@
             </div>
         </div>
     </footer>
-
-    <!-- Fim rodapé -->
-
 </body>
 
 </html>
+
+<script src="./js/sessao.js"></script>
+<script>
+    window.onload = validarSessao_avatar()
+    window.onload = validarSessao_avatar_v2();
+</script>

@@ -23,6 +23,9 @@
             <a href="desenvolvedor.html" class="link link_borda">Desenvolvedor</a>
         </div>
         <div class="div_login">
+            <a href="./perfil.html" class="a_imgAvatarUsuario" hidden>
+                <img src="./assets/avatar.png" alt="avatar usuario" width="100px" height="100px" class="imgAvatar">
+            </a>
             <button class="btn_login" onclick="window.location.href = 'login.html'">Login</button>
         </div>
     </header>
@@ -39,10 +42,14 @@
                     <p>Segue abaixo minhas redes sociais:</p>
                 </div>
                 <div class="div_div_redesSociais">
-                    <a href="https://github.com/Daniel-Costa-Avelino"><img src="./assets/icone_github_dev.png" alt="Icone github"></a>
-                    <a href="https://www.linkedin.com/in/daniel-costa-avelino-a05ba6257/"><img src="./assets/icone_linkedin_dev.png" alt="Icone linkedin"></a>
-                    <a href="https://www.instagram.com/daniel_avelino12/"><img src="./assets/icone_instagram_dev.png" alt="Ícone instagram"></a>
-                    <a href="mailto:danielavelinocosta123@gmail.com"><img src="./assets/icone_email_dev.png" alt="Ícone email"></a>
+                    <a href="https://github.com/Daniel-Costa-Avelino"><img src="./assets/icone_github_dev.png"
+                            alt="Icone github"></a>
+                    <a href="https://www.linkedin.com/in/daniel-costa-avelino-a05ba6257/"><img
+                            src="./assets/icone_linkedin_dev.png" alt="Icone linkedin"></a>
+                    <a href="https://www.instagram.com/daniel_avelino12/"><img src="./assets/icone_instagram_dev.png"
+                            alt="Ícone instagram"></a>
+                    <a href="mailto:danielavelinocosta123@gmail.com"><img src="./assets/icone_email_dev.png"
+                            alt="Ícone email"></a>
                 </div>
             </div>
         </div>
@@ -63,3 +70,9 @@
 </body>
 
 </html>
+
+<script src="./js/sessao.js"></script>
+<script>
+    window.onload = validarSessao_avatar()
+    window.onload = validarSessao_avatar_v2();
+</script>

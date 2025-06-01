@@ -24,6 +24,10 @@
             <a href="desenvolvedor.html" class="link">Desenvolvedor</a>
         </div>
         <div class="div_login">
+            <a href="./perfil.html" class="a_imgAvatarUsuario" hidden>
+                <img src="./assets/avatar.png" alt="avatar usuario" width="140px" height="120px" class="imgAvatar"
+                    id="imgAvatar">
+            </a>
             <button class="btn_login" onclick="window.location.href = 'login.html'">Login</button>
         </div>
     </header>
@@ -32,10 +36,10 @@
     <section class="sessao_perfil">
         <div class="div_infos">
             <div class="div_avatar">
-                <img src="./assets/avatar.png" alt="Avatar do usuário">
+                <img src="./assets/avatar.png" alt="Avatar do usuário" class="imgAvatar" id="imgAvatar">
             </div>
             <div class="div_infos_pessoal">
-                <p><span class="span_p_infos" id="p_username">Username: </span></p>
+                <p><span class="span_p_infos" id="p_username">Nome: </span></p>
                 <p><span class="span_p_infos" id="p_idade">Idade: </span></p>
                 <p><span class="span_p_infos" id="p_generoUsuario">Gênero: </span></p>
             </div>
@@ -53,47 +57,6 @@
             <button class="btn_editar" onclick="mostrarModalEditar()">
                 <img src="./assets/iconeEditar.png" alt="Ícone de Editar">
                 Editar
-            </button>
-        </div>
-    </section>
-
-    <section class="sessao_ordenar">
-        <h1 class="titulo_ordenar">Ordenar por:</h1>
-        <div class="div_selects_ordenar">
-            <select name="select_genero" id="select_ordenarGenero">
-                <option value="#">Selecione um gênero</option>
-                <option value="Ação">Ação</option>
-                <option value="Aventura">Aventura</option>
-                <option value="Comédia">Comédia</option>
-                <option value="Drama">Drama</option>
-                <option value="Fantasia">Fantasia</option>
-                <option value="Música">Música</option>
-                <option value="Romance">Romance</option>
-                <option value="Ficção Científica">Ficção Científica</option>
-                <option value="Seinen">Seinen</option>
-                <option value="Shoujo">Shoujo</option>
-                <option value="Shounen">Shounen</option>
-                <option value="Slice-of-life">Slice-of-life</option>
-                <option value="Esportes">Esportes</option>
-                <option value="Sobrenatural">Sobrenatural</option>
-                <option value="Suspense">Suspense</option>
-            </select>
-
-            <select name="select_ordem" id="select_ordemAlfabetica">
-                <option value="#">Ordem alfabética</option>
-                <option value="crescente">Crescente</option>
-                <option value="decrescente">Decrescente</option>
-            </select>
-
-            <select name="select_data" id="select_datalancamento">
-                <option value="#">Data de lançamento</option>
-                <option value="atual">Mais atual</option>
-                <option value="antigo">Mais antigo</option>
-            </select>
-
-            <button class="btn_filtrar">
-                <img src="./assets/iconeFiltro.png" alt="Icone de filtro">
-                Filtrar
             </button>
         </div>
     </section>
@@ -269,6 +232,7 @@
                     <option value="username">Username</option>
                     <option value="idade">Idade</option>
                     <option value="generoUsuario">Gênero</option>
+                    <option value="avatarUsuario">Adicionar link do avatar</option>
                 </select>
             </div>
             <div class="div_campo">
@@ -293,6 +257,8 @@
 
 <script>
 
+    window.onload = validarSessao();
+    window.onload = validarSessao_avatar();
     window.onload = exibirAnime();
     window.onload = buscarInfosUsuario();
 
@@ -319,10 +285,11 @@
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.NOME_USUARIO = json.username;
                     sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.AVATAR_USUARIO = json.avatar;
                     sessionStorage.IDADE_USUARIO = json.idade;
                     sessionStorage.GENERO_USUARIO = json.generoUsuario;
 
-                    p_username.innerHTML = `<p><span class="span_p_infos" id="p_username">Username: 
+                    p_username.innerHTML = `<p><span class="span_p_infos" id="p_username">Nome: 
         </span>${sessionStorage.getItem("NOME_USUARIO")}</p>`;
 
 
@@ -535,6 +502,7 @@
                     p_animePreferido.innerHTML = `
                             <p><span class="span_p_infos" id="p_animePreferido">Anime preferido: </span>${animePreferido}</p>
                             `
+
                 });
             } else {
 
@@ -545,14 +513,13 @@
                     `
 
                 p_animePreferido.innerHTML = `
-                            <p><span class="span_p_infos" id="p_animePreferido">Anime preferido: </span>Nemhum anime adicionado</p>
+                            <p><span class="span_p_infos" id="p_animePreferido">Anime preferido: </span>Nenhum anime adicionado</p>
                             `
 
                 console.log("Houve um erro ao tentar exibir os animes!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    //finalizarAguardar(texto);
                 });
             }
 
@@ -595,7 +562,7 @@
                 if (resposta.ok) {
                     var mensagem = "Informações editadas com sucesso"
                     modalFuncionou(mensagem);
-                    setInterval(fecharModalMensagem, 3000)
+                    setInterval(fecharModalMensagem, 3000);
                 } else {
                     var mensagem = "Houve um erro ao tentar alterar as informações!"
                     modalErro(mensagem);
