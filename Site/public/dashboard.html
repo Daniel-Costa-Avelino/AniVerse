@@ -178,7 +178,7 @@
 
                     if (json[0].qtdTempoAssistido != null) {
                         p_tempo_assistido.innerHTML = `
-                        <p id="p_tempo_assistido" class="p_paragrafo_indicador">${json[0].qtdTempoAssistido} minutos</p>
+                        <p id="p_tempo_assistido" class="p_paragrafo_indicador">${parseInt(json[0].qtdTempoAssistido / 60)} horas</p>
                     `;
                     } else {
                         p_tempo_assistido.innerHTML = `
