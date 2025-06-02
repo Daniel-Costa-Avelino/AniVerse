@@ -81,5 +81,10 @@ function validarSessao_avatarDash() {
 
     if (avatarUsuario != 'null') {
         avatarImg.src = avatarUsuario;
-    } 
+    }
+}
+
+function limparSessao() {
+    sessionStorage.clear();
+    window.location = "../login.html";
 }

@@ -49,7 +49,7 @@
 .div_links_dashboard_editar {
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: end;
     align-items: center;
     gap: 15px;
     height: 15%;
